@@ -1,0 +1,20 @@
+{
+  "name": "nobacksies-launch",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "$NOBACKSIES launch tooling — Meteora DBC config, validation, devnet launch",
+  "scripts": {
+    "build:config": "node src/build-config.js",
+    "launch:devnet": "node src/launch.js",
+    "launch:devnet:send": "node src/launch.js --send"
+  },
+  "dependencies": {
+    "@meteora-ag/cp-amm-sdk": "^1.5.1",
+    "@meteora-ag/dynamic-bonding-curve-sdk": "^1.5.13",
+    "@solana/web3.js": "^1.98.4",
+    "bn.js": "^5.2.2",
+    "decimal.js": "^10.6.0",
+    "dotenv": "^17.2.3"
+  }
+}
