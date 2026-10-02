@@ -5,11 +5,16 @@
  * Touches no network and spends nothing. This is the gate every change has to
  * pass before create-config.js is allowed near a keypair.
  */
+import 'dotenv/config'
 import { PublicKey } from '@solana/web3.js'
 import BN from 'bn.js'
 import {
   buildCurveWithMarketCap,
   getBaseFeeNumeratorByPeriod,
+  getTotalFeeNumerator,
+  isDefaultLockedVesting,
+  MAX_SQRT_PRICE,
+  bpsToFeeNumerator,
   validateConfigParameters,
   getMigrationThresholdPrice,
   getPriceFromSqrtPrice,
@@ -52,6 +57,17 @@ function main() {
     getMigrationThresholdPrice(c.migrationQuoteThreshold, c.sqrtStartPrice, c.curve),
   )
 
+  // buildCurveWithMarketCap emits ONE priced segment plus a tail pinned at
+  // MAX_SQRT_PRICE that absorbs 0 SOL. Reporting curve.length as "segments"
+  // implies a two-segment shape that was never selected.
+  const priced = c.curve.filter((pt) => !pt.sqrtPrice.eq(MAX_SQRT_PRICE)).length
+
+  // dynamicFeeEnabled adds a volatility component on top of the base fee, so
+  // every "10% -> 1%" figure is a floor, not the fee.
+  const maxVol = { volatilityAccumulator: new BN(c.poolFees.dynamicFee.maxVolatilityAccumulator) }
+  const totalAt = (baseNumerator) =>
+    pct(feeNumeratorToBps(getTotalFeeNumerator(baseNumerator, c.poolFees.dynamicFee, maxVol)))
+
   const lockedLp =
     c.partnerPermanentLockedLiquidityPercentage + c.creatorPermanentLockedLiquidityPercentage
   const claimableLp = c.partnerLiquidityPercentage + c.creatorLiquidityPercentage
@@ -66,10 +82,10 @@ function main() {
     ['migration price', `${migrationPrice.toSignificantDigits(6)} SOL`],
     ['price multiple', `${migrationPrice.div(startPrice).toFixed(1)}×`],
     ['migration threshold', `${sol(c.migrationQuoteThreshold).toFixed(3)} SOL`],
-    ['curve segments', String(c.curve.length)],
+    ['curve segments', `${priced} priced + ${c.curve.length - priced} dust tail`],
     null,
-    ['sniper fee at t=0', pct(feeNumeratorToBps(c.poolFees.baseFee.cliffFeeNumerator))],
-    ['floor fee', pct(CURVE.fee.baseFeeParams.feeSchedulerParam.endingFeeBps)],
+    ['sniper fee at t=0', `${pct(feeNumeratorToBps(c.poolFees.baseFee.cliffFeeNumerator))} base, up to ${totalAt(c.poolFees.baseFee.cliffFeeNumerator)} with dynamic fee`],
+    ['floor fee', `${pct(CURVE.fee.baseFeeParams.feeSchedulerParam.endingFeeBps)} base, up to ${totalAt(bpsToFeeNumerator(CURVE.fee.baseFeeParams.feeSchedulerParam.endingFeeBps))} with dynamic fee`],
     // In FeeScheduler mode firstFactor = numberOfPeriod and
     // secondFactor = seconds per period (activationType is Timestamp).
     ['decay', `${c.poolFees.baseFee.firstFactor} steps \u00d7 ${c.poolFees.baseFee.secondFactor}s = ${c.poolFees.baseFee.firstFactor * c.poolFees.baseFee.secondFactor}s (time, not trades)`],
@@ -103,15 +119,32 @@ function main() {
     console.log(`    t = ${String(period * bf.secondFactor).padStart(4)}s   ${pct(feeNumeratorToBps(n))}`)
   }
 
+  // Every switch that has to hold for the public promise to be true. The
+  // earlier five-predicate version passed hostile edits the SDK itself accepts
+  // — a 99% permanent exit tax and a 10%-of-supply creator unlock among them.
   const fails = []
+  const sched = CURVE.fee.baseFeeParams.feeSchedulerParam
   if (c.migratedPoolFee.collectFeeMode !== 2) fails.push('migrated pool is NOT in compounding mode')
+  if (c.migrationFeeOption !== 6) fails.push(`migrationFeeOption is ${c.migrationFeeOption}, not Customizable(6) — the whole migratedPoolFee block is silently zeroed`)
+  if (Number(c.compoundingFeeBps) !== 10000) fails.push(`compoundingFeeBps is ${c.compoundingFeeBps}, not 10000`)
   if (lockedLp !== 100) fails.push(`only ${lockedLp}% of LP is permanently locked`)
   if (claimableLp !== 0) fails.push(`${claimableLp}% of LP is withdrawable — that is a backsie`)
   if (c.tokenUpdateAuthority !== 1) fails.push('token authorities are not Immutable')
   if (c.migrationFee.feePercentage !== 0) fails.push('migration takes a cut')
+  if (c.migrationFee.creatorFeePercentage !== 0) fails.push('migration takes a creator cut')
+  if (c.creatorTradingFeePercentage !== 0) fails.push(`creatorTradingFeePercentage is ${c.creatorTradingFeePercentage}, not 0`)
+  if (!isDefaultLockedVesting(c.lockedVesting)) fails.push('lockedVesting is non-default — someone gets a token unlock')
+  if (!c.poolCreationFee.isZero()) fails.push(`poolCreationFee is ${c.poolCreationFee.toString(10)}, not 0`)
+  if (CURVE.token.leftover !== 0) fails.push(`leftover is ${CURVE.token.leftover}, not 0 — unsold supply would be sweepable`)
+  if (sched.endingFeeBps > 100) fails.push(`endingFeeBps is ${sched.endingFeeBps} — a permanent ${(sched.endingFeeBps / 100).toFixed(2)}% trade tax`)
+  if (c.migratedPoolFee.poolFeeBps !== 100) fails.push(`migrated poolFeeBps is ${c.migratedPoolFee.poolFeeBps}, not the advertised 100`)
 
   const todo = []
   if (!TOKEN.uri) todo.push('TOKEN.uri is empty — upload metadata json before launch')
+  // The legacy transaction is already ~1104 of its 1232 bytes with a short
+  // Arweave uri, and the compute-budget instructions add 52 more. launch.js
+  // measures the real size; catch an over-long uri here, before the send.
+  else if (TOKEN.uri.length > 120) fails.push(`TOKEN.uri is ${TOKEN.uri.length} chars — past ~120 the legacy transaction exceeds 1232 bytes. Use https://arweave.net/<43-char-txid>`)
   if (usingPlaceholder) todo.push('LEFTOVER_RECEIVER unset — validated with a placeholder key')
 
   console.log('')

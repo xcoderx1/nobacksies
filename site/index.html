@@ -11,11 +11,11 @@
      replace https://nobacksies.fun with the deployed origin. -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="$NOBACKSIES — playground rules apply">
-<meta property="og:description" content="Liquidity locked forever. Authorities burned. Fees compound into the pool, not a dev wallet.">
+<meta property="og:description" content="Liquidity locked forever. Mint authority burned. After graduation, the pool’s share of every swap fee compounds back into the pool.">
 <meta property="og:image" content="https://nobacksies.fun/assets/banner.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="$NOBACKSIES — playground rules apply">
-<meta name="twitter:description" content="Liquidity locked forever. Authorities burned. Fees compound into the pool, not a dev wallet.">
+<meta name="twitter:description" content="Liquidity locked forever. Mint authority burned. After graduation, the pool’s share of every swap fee compounds back into the pool.">
 <meta name="twitter:image" content="https://nobacksies.fun/assets/banner.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -156,14 +156,14 @@ footer p{margin:0 0 10px}
   <section>
     <h2>Playground rules</h2>
     <div class="stickers">
-      <div class="card sticker"><div class="icon">🪙</div><h3>Every trade drops a coin</h3><p>Once the jar graduates, the pool runs in compounding mode: every swap fee goes back into pool liquidity instead of to a fee wallet. More trading, fuller jar.</p></div>
+      <div class="card sticker"><div class="icon">🪙</div><h3>Every trade drops a coin</h3><p>Once the jar graduates, the pool runs in compounding mode: the pool’s share of every swap fee is added back to liquidity instead of going to a fee wallet. Meteora takes a protocol cut first.</p></div>
       <div class="card sticker"><div class="icon">🔒</div><h3>Nobody gets backsies</h3><p>100% of liquidity locked forever. No dev, no team, nobody can take it out. Not even if they ask nicely.</p></div>
-      <div class="card sticker"><div class="icon">🤖</div><h3>Snipers pay 10×</h3><p>The fee opens at 10% and decays to 1% over the first hour. Whoever cuts the line pays the most for it.</p></div>
+      <div class="card sticker"><div class="icon">🤖</div><h3>Snipers pay 10× the fee</h3><p>The fee opens at 10% and decays to 1% over the first hour. It is a tax on their stake, not a wall — see the honesty corner.</p></div>
     </div>
   </section>
 
   <section id="proof">
-    <h2>Fill the jar (the proof)</h2>
+    <h2>Fill the jar (toy model)</h2>
     <div class="sim">
       <div class="card controls">
         <div class="ctl"><label for="fee">Jarold's fee <output id="feeO"></output></label><input id="fee" type="range" min="0.25" max="3" step="0.25" value="1"></div>
@@ -185,7 +185,7 @@ footer p{margin:0 0 10px}
   <section>
     <h2>Jarold's honesty corner</h2>
     <div class="two">
-      <div class="card nope yes"><h3>Jarold can prove</h3><ul>
+      <div class="card nope yes"><h3>What the model shows</h3><ul>
         <li><span><b>Fees that stay make the pool deeper.</b> Same trades, bigger pool. Run it yourself above.</span></li>
         <li><span><b>A deeper pool flinches less.</b> The same whale dump moves price less.</span></li>
         <li><span><b>Jarold fills several times faster</b> than a normal graduated pump.fun coin.</span></li>
@@ -194,7 +194,10 @@ footer p{margin:0 0 10px}
         <li><span><b>Number go up.</b> Nobody knows that. Anyone who says they do is lying.</span></li>
         <li><span><b>A stable price.</b> A fuller jar softens dumps. It doesn't stop them.</span></li>
         <li><span><b>That people will trade.</b> Higher fees scare some bots off. The sim doesn't model that.</span></li>
-        <li><span><b>That fees compound before graduation.</b> Compounding only exists in the DAMM v2 pool. On the bonding curve itself, fees go to a fee claimer — the chain has no way to route them into the curve.</span></li>
+        <li><span><b>That the early fee stops snipers.</b> It taxes their stake, not their size. A 15&nbsp;SOL buy in the first block still clears a large profit on the way up. Nothing available in the program caps a single buyer.</span></li>
+        <li><span><b>That Meteora's code can never change.</b> Both programs are upgradeable by their own authority. Our config is permanent; the code reading it is not.</span></li>
+        <li><span><b>That the whole fee compounds.</b> Meteora's protocol cut comes out first. We compound 100% of what is left, and will publish the measured cut after devnet.</span></li>
+        <li><span><b>That fees compound before graduation.</b> Compounding only exists in the DAMM v2 pool. On the bonding curve itself, fees go to a fee claimer — the chain has no way to route them into the curve. We will publish that address before launch.</span></li>
       </ul></div>
     </div>
   </section>
@@ -203,9 +206,9 @@ footer p{margin:0 0 10px}
     <h2>How Jarold gets built</h2>
     <ol class="card recipe">
       <li><div><b>Bonding curve launch</b>Meteora's Dynamic Bonding Curve sells the first tokens from a 1B supply. No custom contract to audit.</div></li>
-      <li><div><b>Authorities burned at mint</b>No mint authority and no metadata authority, from the first block. The supply and the name can never change.</div></li>
+      <li><div><b>Authorities burned at mint</b>Minted with <code>tokenAuthorityOption: Immutable</code>, so there is no mint authority. We verify mint, freeze and metadata authority are all null on devnet before launching.</div></li>
       <li><div><b>Fee opens at 10%, decays to 1%</b>Exponential, 60 steps over the first hour. Line-cutters fill the jar.</div></li>
-      <li><div><b>Graduate into a compounding pool</b>A DAMM v2 pool at 1% fee in compounding mode, so the fee goes back into pool liquidity.</div></li>
+      <li><div><b>Graduate into a compounding pool</b>A DAMM v2 pool at 1% base fee (plus up to 0.19% volatility fee) in compounding mode, so the pool’s share of the fee is added back to liquidity.</div></li>
       <li><div><b>Lock 100% of liquidity, permanently</b>Not vested, not time-locked — permanent. Nobody has a withdraw path, including us.</div></li>
       <li><div><b>Test on devnet first</b>Every parameter above is validated by the SDK's own validator and simulated on devnet before anything goes live.</div></li>
     </ol>
@@ -213,8 +216,8 @@ footer p{margin:0 0 10px}
 
   <footer>
     <div class="card">
-      <p><b>$NOBACKSIES doesn't exist yet.</b> This is a concept page, not an offer to buy anything. Meme coins are speculative and most go to zero. Jarold is a cartoon, not financial advice.</p>
-      <p>Sim assumptions: 100 SOL starting pool against 20% of supply, random trades of 0.1–5 SOL where buyers and sellers pull price back toward its start (so the pool is never drained by a random crash), 80% of the fee kept by the pool (the rest is the platform's cut), averaged over 12 runs. Growth is measured as √(x·y), so price drift doesn't count.</p>
+      <p><b>$NOBACKSIES doesn't exist yet.</b> The numbers above come from a toy model, not from the token — it has not launched, so there is nothing to measure. This is a concept page, not an offer to buy anything. Meme coins are speculative and most go to zero. Jarold is a cartoon, not financial advice.</p>
+      <p>Sim assumptions: 100 SOL starting pool against 20% of supply, random trades of 0.1–5 SOL where buyers and sellers pull price back toward its start (so the pool is never drained by a random crash), 80% of the fee assumed kept by the pool. That 80% is the bonding-curve constant, not a measured value for the compounding pool — the real protocol cut is a Meteora pool parameter we have not yet read. Averaged over 12 runs. Growth is measured as √(x·y), so price drift doesn't count.</p>
     </div>
   </footer>
 </div>
