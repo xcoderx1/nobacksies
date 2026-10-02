@@ -8,14 +8,12 @@
 <link rel="icon" href="assets/logo.png">
 <meta name="robots" content="index,follow">
 <link rel="apple-touch-icon" href="assets/logo.png">
-<!-- og:image must be an absolute URL once this is on a real domain;
-     replace https://nobacksies.fun with the deployed origin. -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="$NOBACKSIES — playground rules apply">
+<meta property="og:title" content="$NOBACKSIES — the nerd corner">
 <meta property="og:description" content="Swap fees are added permanently to the pool instead of a fee wallet, and nobody can withdraw them — including us. It does not stop a sell-off. Not launched yet.">
 <meta property="og:image" content="https://xcoderx1.github.io/nobacksies/assets/banner.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="$NOBACKSIES — playground rules apply">
+<meta name="twitter:title" content="$NOBACKSIES — the nerd corner">
 <meta name="twitter:description" content="Swap fees are added permanently to the pool instead of a fee wallet, and nobody can withdraw them — including us. It does not stop a sell-off. Not launched yet.">
 <meta name="twitter:image" content="https://xcoderx1.github.io/nobacksies/assets/banner.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -328,6 +326,8 @@ footer p{margin:0 0 10px}
   }
 
   function drawJar(growth){
+    // #jar is the front page's hero mascot; this page has no jar to draw.
+    if(!$("jar")) return;
     const ink="#13243B";
     const fill=Math.min(0.96,0.2+growth*0.85);           // share of jar filled with coins
     const top=110, bottom=370, h=(bottom-top-20)*fill, cy0=bottom-18;
