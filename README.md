@@ -152,6 +152,65 @@ Worth stating plainly, because the landing page is a sales pitch and this file i
 7. `launch.js` refuses a mainnet send unless `I_UNDERSTAND_NO_BACKSIES=yes`. The
    guard is there because none of this is reversible — there is no admin key.
 
+## The devnet gate
+
+One run settles every remaining unknown. Do not launch on mainnet until it passes.
+
+It must use the **real custody setup**, not a convenient hot wallet, because the
+custody choice changes the code path being tested. The mainnet migration we
+decoded had a `feeClaimer` with `isOnCurve: true` — an ordinary keypair that
+signs directly. A Squads vault is the opposite: a PDA that signs by having the
+Squads program invoke cp-amm on its behalf. That path is not exercised by
+anything we verified, and `FEE_CLAIMER` can never be changed afterwards.
+
+```
+1. Create a Squads multisig on devnet. Set its vault as FEE_CLAIMER.
+2. Launch with the exact mainnet config:
+     100% permanent lock, Compounding, compoundingFeeBps 5000
+     npm run build:config && npm run launch:devnet -- --send
+3. Trade the curve to graduation, then:
+     npm run migrate <pool> -- --send
+4. Assert, against decoded accounts and not an explorer:
+     - position NFT account owner == the Squads vault
+     - migrated pool collect_fee_mode == 2 (Compounding)
+     - getMint(baseMint): mintAuthority == null AND freezeAuthority == null
+     - second_position was never created
+     - record the pool's real protocol_fee_percent (the site assumes 80%)
+5. Make a few trades, then claim through the multisig: propose, approve, execute.
+   Confirm the SOL actually arrives.
+6. Confirm remove_liquidity FAILS against the locked position.
+```
+
+Step 5 is the one that matters. It proves three things at once that nothing else
+can: that a locked position really does pay claimable fees, that a PDA vault can
+drive `claim_position_fee` under CPI, and that the whole custody plan works end
+to end. If it fails, the fallback is a single hardware wallet with a written
+offline seed backup — and you will have learned it for free instead of on an
+address you can never change.
+
+Two details that make step 5 more likely to work than it looks: in
+`claim_position_fee` the `signer` account is **not writable**, so a PDA signer
+needs no lamports, and `token_a_account` / `token_b_account` are separate
+writable accounts, so the fees land wherever you nominate rather than on the
+signer itself. The real risks are compute budget and transaction size once the
+Squads wrapper is added, both of which step 5 exposes.
+
+Step 6 is cheap and worth doing: it is the only direct evidence that "nobody can
+withdraw the liquidity" is enforced rather than assumed.
+
+This run also closes the rarely-exercised-path risk. In a sample of 41 migrated
+DBC pools on mainnet, **zero** used permanent LP lock — every one used
+withdrawable partner LP. Permanent lock plus Compounding is a combination almost
+nothing has run through. Graduating your exact config on devnet is the only way
+to find out what that path does before it is irreversible.
+
+## Still non-technical
+
+- the metadata JSON and image, uploaded; `TOKEN.uri` is immutable after launch
+- X and Telegram handles checked and held
+- whether financial-promotion rules apply where you are, resolved before the
+  page is public
+
 ## Disclaimer
 
 $NOBACKSIES does not exist yet. This repository is a configuration and a concept
