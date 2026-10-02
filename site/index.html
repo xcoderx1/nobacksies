@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>$NOBACKSIES — playground rules apply</title>
-<meta name="description" content="A liquidity pool that can only get deeper, and that nobody can ever withdraw from — including us. Fees compound back into the pool instead of a fee wallet. It protects the liquidity, not the price.">
+<meta name="description" content="After graduation, the pool’s share of every swap fee is added permanently to the pool instead of a fee wallet, and nobody can withdraw it — including us. It does not stop a sell-off. Not launched yet.">
 <link rel="icon" href="assets/logo.png">
 <link rel="apple-touch-icon" href="assets/logo.png">
 <!-- og:image must be an absolute URL once this is on a real domain;
      replace https://nobacksies.fun with the deployed origin. -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="$NOBACKSIES — playground rules apply">
-<meta property="og:description" content="A pool that can only get deeper, and that nobody can ever withdraw from — including us. It protects the liquidity, not the price.">
+<meta property="og:description" content="Swap fees are added permanently to the pool instead of a fee wallet, and nobody can withdraw them — including us. It does not stop a sell-off. Not launched yet.">
 <meta property="og:image" content="https://nobacksies.fun/assets/banner.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="$NOBACKSIES — playground rules apply">
-<meta name="twitter:description" content="A pool that can only get deeper, and that nobody can ever withdraw from — including us. It protects the liquidity, not the price.">
+<meta name="twitter:description" content="Swap fees are added permanently to the pool instead of a fee wallet, and nobody can withdraw them — including us. It does not stop a sell-off. Not launched yet.">
 <meta name="twitter:image" content="https://nobacksies.fun/assets/banner.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -170,9 +170,9 @@ footer p{margin:0 0 10px}
   <section>
     <h2>Playground rules</h2>
     <div class="stickers">
-      <div class="card sticker"><div class="icon">🪙</div><h3>The jar only fills</h3><p>After graduation the pool runs in compounding mode: the pool’s share of every swap fee is added straight back to liquidity instead of to a fee wallet. Depth goes one direction.</p></div>
+      <div class="card sticker"><div class="icon">🪙</div><h3>The jar only fills</h3><p>After graduation the pool runs in compounding mode: the pool’s share of every swap fee is added straight back into the pool’s SOL, instead of to a fee wallet. Nobody can draw it out again.</p></div>
       <div class="card sticker"><div class="icon">🔒</div><h3>Nobody can empty it</h3><p>100% of the LP is permanently locked — not vested, not timelocked. There is no withdraw instruction anyone can call. That includes us, and we cannot change our minds later.</p></div>
-      <div class="card sticker"><div class="icon">⚠️</div><h3>It guards the liquidity, not the price</h3><p>A locked jar cannot be emptied, but anyone holding tokens can still sell into it. Deeper means a dump moves price less. It does not mean a dump can’t happen.</p></div>
+      <div class="card sticker"><div class="icon">⚠️</div><h3>It will not stop a dump</h3><p>A fuller jar does <b>not</b> make a sell-off hurt less. The same dump moves the price by the same percentage whether the jar holds 110 SOL or 2,110 SOL. We measured it. Anyone holding tokens can still sell into the jar.</p></div>
     </div>
   </section>
 
@@ -190,16 +190,16 @@ footer p{margin:0 0 10px}
         <p class="caveat">Compounding mode is Meteora’s feature, not ours. What is unusual is pairing it with a full permanent lock — normally fees are compounded <i>so that</i> someone can eventually withdraw a bigger position. Removing that exit is the whole idea.</p>
       </div>
       <div class="card">
-        <h3>It is a slow ratchet</h3>
-        <p>At a 1% fee, roughly 0.008&nbsp;SOL of depth is added per 1&nbsp;SOL of volume. So the jar fills in proportion to how much it is actually traded:</p>
+        <h3>What that actually does</h3>
+        <p>Meteora adds the compounded fee to the pool’s <b>SOL</b> only — never to the token side. So the pool holds more SOL against the same tokens, and the price rises. It does <b>not</b> make a sell-off hurt less: how far a dump moves the price depends on the token side, which never grows.</p>
         <table class="ratchet">
-          <tr><th>cumulative volume</th><th>pool depth</th></tr>
-          <tr class="now"><td>at launch</td><td>110 SOL</td></tr>
-          <tr><td>13,700 SOL</td><td>219 SOL &nbsp;(2×)</td></tr>
-          <tr><td>50,000 SOL</td><td>510 SOL &nbsp;(4.6×)</td></tr>
-          <tr><td>250,000 SOL</td><td>2,110 SOL &nbsp;(19×)</td></tr>
+          <tr><th>round-trip volume</th><th>SOL in pool</th><th>price</th><th>2%-supply dump</th></tr>
+          <tr class="now"><td>at launch</td><td>110 SOL</td><td>1.00×</td><td>−18.8%</td></tr>
+          <tr><td>5,000 SOL</td><td>148 SOL</td><td>1.35×</td><td>−18.8%</td></tr>
+          <tr><td>25,000 SOL</td><td>304 SOL</td><td>2.77×</td><td>−18.8%</td></tr>
+          <tr><td>100,000 SOL</td><td>895 SOL</td><td>8.17×</td><td>−18.8%</td></tr>
         </table>
-        <p class="caveat">Doubling the pool takes about 125× its own size in volume. On day one the jar is thin and a large early holder can still move the price hard. The protection is something the jar earns over time, not something it has at launch. These figures assume the pool keeps 80% of the fee after Meteora’s cut — we have not measured the real cut yet.</p>
+        <p class="caveat">Equal buys and sells — no net buying at all. A pool that pays its fees out ends every one of those rows at 110&nbsp;SOL and 1.00×. That gap is the entire mechanism. Note the last column does not move: the jar getting fuller is not protection. These figures assume the pool keeps 80% after Meteora’s cut, which we have not measured yet, and the pool’s SOL still falls if people are net sellers.</p>
       </div>
     </div>
   </section>
@@ -229,16 +229,17 @@ footer p{margin:0 0 10px}
     <div class="two">
       <div class="card nope yes"><h3>What the model shows</h3><ul>
         <li><span><b>Fees that stay make the pool deeper.</b> Same trades, bigger pool. Run it yourself above.</span></li>
-        <li><span><b>A deeper pool flinches less.</b> The same whale dump moves price less.</span></li>
+        <li><span><b>The same volume leaves the pool richer.</b> 5,000&nbsp;SOL of round-trip trading leaves 148&nbsp;SOL in a compounding pool and 110&nbsp;SOL in one that pays its fees out.</span></li>
         <li><span><b>Jarold fills faster</b> than a pool that pays its fees out — under this model’s assumptions, which we picked. It is a sketch of the mechanism, not a forecast.</span></li>
       </ul></div>
       <div class="card nope"><h3>Jarold will not promise</h3><ul>
-        <li><span><b>That you can’t get dumped on.</b> The lock stops the jar being emptied. It does nothing about who holds the tokens. Someone who buys early and sells later is selling <i>into</i> the jar, not taking it — and on day one, when the jar is still thin, that moves the price a long way down. Nothing in Meteora’s program caps how much one wallet can buy.</span></li>
+        <li><span><b>That you can’t get dumped on.</b> At graduation about <b>82% of the supply is held by curve buyers</b> and only 18% sits in the locked jar. The lock stops the jar being emptied; it does nothing about that 82%. Someone who buys early and sells later is selling <i>into</i> the jar, not taking it.</span></li>
+        <li><span><b>That one wallet can’t do it alone.</b> The whole curve graduates on about <b>122&nbsp;SOL</b>, and nothing in Meteora’s program caps a single buyer — one wallet can fill it in a single transaction. The amount-based fee limiter that would price that in is deprecated and unavailable to new launches.</span></li>
         <li><span><b>Number go up.</b> Nobody knows that. Anyone who says they do is lying.</span></li>
         <li><span><b>A stable price.</b> A fuller jar softens dumps. It doesn't stop them.</span></li>
         <li><span><b>That people will trade.</b> Higher fees scare some bots off. The sim doesn't model that.</span></li>
         <li><span><b>That the early fee stops snipers.</b> It taxes their stake, not their size. A 15&nbsp;SOL buy in the first block still clears a large profit on the way up. Nothing available in the program caps a single buyer.</span></li>
-        <li><span><b>That Meteora's code can never change.</b> Both programs are upgradeable by their own authority. Our config is permanent; the code reading it is not.</span></li>
+        <li><span><b>That compounding can never be switched off.</b> Our config is permanent, but <code>compounding_fee_bps</code> becomes ordinary pool state at migration, and Meteora's already-deployed <code>update_pool_fees</code> instruction can turn it down — no program upgrade required. Both programs are also upgradeable by their own authority. We hold neither key, and we cannot stop either.</span></li>
         <li><span><b>That the whole fee compounds.</b> Meteora's protocol cut comes out first. We compound 100% of what is left, and will publish the measured cut after devnet.</span></li>
         <li><span><b>That fees compound before graduation.</b> Compounding only exists in the DAMM v2 pool. On the bonding curve itself, fees go to a fee claimer — the chain has no way to route them into the curve. We will publish that address before launch.</span></li>
       </ul></div>
@@ -252,7 +253,7 @@ footer p{margin:0 0 10px}
       <li><div><b>Authorities burned at mint</b>Minted with <code>tokenAuthorityOption: Immutable</code>, so there is no mint authority. We verify mint, freeze and metadata authority are all null on devnet before launching.</div></li>
       <li><div><b>Fee opens at 10%, decays to 1%</b>Exponential, 60 steps over the first hour, so the earliest buys pay the most into the jar. It is a tax on early entries, not a cap on them — Meteora’s amount-based limiter is deprecated and unavailable to new launches.</div></li>
       <li><div><b>Graduate into a compounding pool</b>A DAMM v2 pool at 1% base fee (plus up to 0.19% volatility fee) in compounding mode, so the pool’s share of the fee is added back to liquidity.</div></li>
-      <li><div><b>Lock 100% of liquidity, permanently</b>Not vested, not timelocked — permanent, with no withdraw path for us or anyone else. Meteora’s own programs are upgradeable, so the code reading our config can change even though the config cannot.</div></li>
+      <li><div><b>Lock 100% of liquidity, permanently</b>Not vested, not timelocked — permanent, with no withdraw path for us or anyone else. Meteora’s own programs are upgradeable and its operators can still retune a live pool, so the code reading our config can change even though the config cannot.</div></li>
       <li><div><b>Test on devnet first</b>Every parameter above is validated by the SDK's own validator and simulated on devnet before anything goes live.</div></li>
     </ol>
   </section>
@@ -291,7 +292,9 @@ footer p{margin:0 0 10px}
     return out;
   }
   function avg(fee,stay,snipe,d1,decay){const a=new Array(DAYS).fill(0);for(let s=1;s<=SEEDS;s++)run(fee,stay,snipe,d1,decay,s*97).forEach((v,i)=>a[i]+=v/SEEDS);return a;}
-  const dump=(L,w)=>{const T=T0*L,x=SUPPLY*w/100;return(1-Math.pow(T/(T+x),2))*100;};
+  // Compounding credits the SOL side only (cp-amm applySwapResult), so the token
+  // reserve never grows and dump impact is identical for all three series.
+  const dump=(L,w)=>{const x=SUPPLY*w/100;return(1-Math.pow(T0/(T0+x),2))*100;};
 
   function drawChart(series){
     const W=640,H=320,P={l:50,r:16,t:16,b:38};
@@ -353,9 +356,9 @@ footer p{margin:0 0 10px}
     drawChart([{d:exit,c:"#9AA6B5",w:4},{d:pump,c:"#FFD43B",w:5},{d:jar,c:"#FF5A5F",w:7}]);
     const L=[jar[DAYS-1],pump[DAYS-1],exit[DAYS-1]];
     const rows=[["Jarold 🫙",L[0],"us"],["Normal coin",L[1],""],["Fees leave",L[2],""]];
-    $("results").innerHTML=rows.map(([n,l,c])=>`<div class="res ${c}"><h4>${n}</h4><div class="big">+${((l-1)*100).toFixed(0)}%</div><div class="sub">bigger pool after 30 days. A ${whale}% whale dump moves price ${dump(l,whale).toFixed(1)}%.</div></div>`).join("");
+    $("results").innerHTML=rows.map(([n,l,c])=>`<div class="res ${c}"><h4>${n}</h4><div class="big">+${((l-1)*100).toFixed(0)}%</div><div class="sub">bigger pool after 30 days. A ${whale}% dump moves price ${dump(l,whale).toFixed(1)}% in every case.</div></div>`).join("");
     const ratio=(L[1]-1)>0?(L[0]-1)/(L[1]-1):0;
-    $("verdict").textContent=`Jarold's jar filled ${ratio.toFixed(1)}× faster than a normal coin's pool, and the whale dump hit ${(dump(L[1],whale)-dump(L[0],whale)).toFixed(1)} points softer. When fees leave, nothing fills. No backsies. 🫙`;
+    $("verdict").textContent=`Jarold's jar filled ${ratio.toFixed(1)}× faster than a normal coin's pool. The ${whale}% dump still moves price ${dump(L[0],whale).toFixed(1)}% either way — a fuller jar is a richer jar, not a safer one. No backsies. 🫙`;
     drawJar(L[0]-1);
   }
   $("run").addEventListener("click",go);
