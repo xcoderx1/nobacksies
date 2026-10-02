@@ -3,11 +3,13 @@
   "private": true,
   "type": "module",
   "version": "0.1.0",
-  "description": "$NOBACKSIES launch tooling — Meteora DBC config, validation, devnet launch",
+  "description": "$NOBACKSIES launch tooling \u2014 Meteora DBC config, validation, devnet launch",
   "scripts": {
     "build:config": "node src/build-config.js",
     "launch:devnet": "node src/launch.js",
-    "launch:devnet:send": "node src/launch.js --send"
+    "launch:devnet:send": "node src/launch.js --send",
+    "migrate": "node src/migrate.js",
+    "migrate:send": "node src/migrate.js"
   },
   "dependencies": {
     "@meteora-ag/cp-amm-sdk": "^1.5.1",
