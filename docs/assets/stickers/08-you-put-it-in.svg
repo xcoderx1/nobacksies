@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<defs><clipPath id="jarclip"><rect x="96" y="120" width="232" height="256" rx="40"/></clipPath></defs>
+
+  <g transform="translate(24,42) scale(0.84)">
+    <ellipse cx="212" cy="396" rx="140" ry="16" fill="#13243B" opacity=".16"/>
+    <rect x="96" y="120" width="232" height="256" rx="40" fill="#E8F6FF" stroke="#13243B" stroke-width="8"/>
+    <g clip-path="url(#jarclip)"><ellipse cx="127" cy="330" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="179" cy="330" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="231" cy="330" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="283" cy="330" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="160" cy="310" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="212" cy="310" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="264" cy="310" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="130" cy="290" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="182" cy="290" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="234" cy="290" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="286" cy="290" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="163" cy="270" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="215" cy="270" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="267" cy="270" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="133" cy="250" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="185" cy="250" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="237" cy="250" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="289" cy="250" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="155" cy="230" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="207" cy="230" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="259" cy="230" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="136" cy="210" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="188" cy="210" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="240" cy="210" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/><ellipse cx="292" cy="210" rx="25" ry="10" fill="#FFD43B" stroke="#13243B" stroke-width="4"/></g>
+    <rect x="96" y="120" width="232" height="256" rx="40" fill="none" stroke="#13243B" stroke-width="8"/>
+    <path d="M122 150 Q114 230 122 300" stroke="#fff" stroke-width="12" stroke-linecap="round" fill="none" opacity=".85"/>
+    <rect x="110" y="78" width="204" height="48" rx="12" fill="#FF5A5F" stroke="#13243B" stroke-width="8"/>
+    <path d="M190 72 V48 a22 22 0 0 1 44 0 V72" fill="none" stroke="#13243B" stroke-width="10"/>
+    <rect x="180" y="66" width="64" height="50" rx="9" fill="#FFD43B" stroke="#13243B" stroke-width="6"/>
+    <circle cx="212" cy="88" r="7" fill="#13243B"/><rect x="209" y="90" width="7" height="15" fill="#13243B"/>
+    <rect x="122" y="146" width="180" height="118" rx="20" fill="#fff" stroke="#13243B" stroke-width="6" transform="rotate(-3 212 205)"/>
+    <ellipse cx="168" cy="196" rx="26" ry="29" fill="#fff" stroke="#13243B" stroke-width="6"/><ellipse cx="256" cy="196" rx="26" ry="29" fill="#fff" stroke="#13243B" stroke-width="6"/>
+             <circle cx="170" cy="200" r="11" fill="#13243B"/><circle cx="254" cy="200" r="11" fill="#13243B"/>
+             <path d="M136 166 L198 166" stroke="#13243B" stroke-width="10" stroke-linecap="round"/><path d="M288 166 L226 166" stroke="#13243B" stroke-width="10" stroke-linecap="round"/>
+             <path d="M184 246 L240 246" stroke="#13243B" stroke-width="7" stroke-linecap="round"/><path d="M78 268 Q50 320 86 346" fill="none" stroke="#13243B" stroke-width="20" stroke-linecap="round"/><path d="M346 268 Q374 320 338 346" fill="none" stroke="#13243B" stroke-width="20" stroke-linecap="round"/>
+            <path d="M78 268 Q50 320 86 346" fill="none" stroke="#FFC9A3" stroke-width="10" stroke-linecap="round"/><path d="M346 268 Q374 320 338 346" fill="none" stroke="#FFC9A3" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  
+  <text x="256" y="428" text-anchor="middle" font-family="Lilita One" font-size="44"
+        fill="#fff" stroke="#13243B" stroke-width="9" paint-order="stroke" letter-spacing="1">you put it in.</text>
+  <text x="256" y="480" text-anchor="middle" font-family="Lilita One" font-size="44"
+        fill="#fff" stroke="#13243B" stroke-width="9" paint-order="stroke" letter-spacing="1">it stays in.</text></svg>

@@ -3,19 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>$NOBACKSIES — playground rules apply</title>
-<meta name="description" content="After graduation, the pool’s share of every swap fee is added permanently to the pool instead of a fee wallet, and nobody can withdraw it — including us. It does not stop a sell-off. Not launched yet.">
+<title>$NOBACKSIES</title>
+<meta name="description" content="Jarold is a jar. Things go in. Nothing comes out. A meme coin where the liquidity is locked forever — nobody can take it back out, not even us. You can sell any time. Not launched yet.">
 <link rel="icon" href="assets/logo.png">
 <link rel="apple-touch-icon" href="assets/logo.png">
-<!-- og:image must be an absolute URL once this is on a real domain;
-     replace https://nobacksies.fun with the deployed origin. -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="$NOBACKSIES — playground rules apply">
-<meta property="og:description" content="Swap fees are added permanently to the pool instead of a fee wallet, and nobody can withdraw them — including us. It does not stop a sell-off. Not launched yet.">
+<meta property="og:title" content="$NOBACKSIES — no backsies.">
+<meta property="og:description" content="Jarold is a jar. Things go in. Nothing comes out. The liquidity is locked forever — not even we can take it back. You can sell any time. Not launched yet.">
 <meta property="og:image" content="https://xcoderx1.github.io/nobacksies/assets/banner.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="$NOBACKSIES — playground rules apply">
-<meta name="twitter:description" content="Swap fees are added permanently to the pool instead of a fee wallet, and nobody can withdraw them — including us. It does not stop a sell-off. Not launched yet.">
+<meta name="twitter:title" content="$NOBACKSIES — no backsies.">
+<meta name="twitter:description" content="Jarold is a jar. Things go in. Nothing comes out. You can sell any time. Not launched yet.">
 <meta name="twitter:image" content="https://xcoderx1.github.io/nobacksies/assets/banner.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,120 +23,79 @@
   --sky:#7CC6FF; --red:#FF5A5F; --sun:#FFD43B; --grass:#5BD17A; --ink:#13243B; --paper:#FFFFFF; --muted:#3B4C63;
   --display:"Lilita One","Arial Black","Impact",sans-serif;
   --body:"Rubik","Segoe UI",system-ui,-apple-system,sans-serif;
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px);
-  padding-bottom:env(safe-area-inset-bottom,0px);
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sky:#1C3F66;--paper:#FFF9EF}}
 :root[data-theme="dark"]{--sky:#1C3F66;--paper:#FFF9EF}
 *,*::before,*::after{box-sizing:inherit}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--sky);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;overflow-x:hidden;
   background-image:radial-gradient(circle at 20px 20px, rgba(255,255,255,.22) 3px, transparent 4px);background-size:44px 44px}
 :focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+img{max-width:100%;height:auto}
 .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
 .card{background:var(--paper);border:4px solid var(--ink);border-radius:22px;box-shadow:8px 8px 0 var(--ink)}
-
 .marquee{background:var(--ink);color:var(--sun);font-family:var(--display);font-size:20px;white-space:nowrap;overflow:hidden}
-.marquee div{display:inline-block;padding:10px 0;animation:scroll 30s linear infinite}
+.marquee div{display:inline-block;padding:10px 0;animation:scroll 32s linear infinite}
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;padding:48px 0 40px}
-.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(64px,10vw,124px);line-height:.86;margin:0 0 22px;color:var(--paper);
-  -webkit-text-stroke:5px var(--ink);paint-order:stroke fill;text-shadow:8px 8px 0 var(--ink);transform:rotate(-3deg)}
-.hero .bubble{position:relative;padding:20px 24px;font-size:20px;font-weight:600;max-width:30em;transform:rotate(1deg)}
-.hero .bubble::after{content:"";position:absolute;right:-26px;top:38px;border:14px solid transparent;border-left:22px solid var(--ink)}
-.ticker{display:inline-block;font-family:var(--display);font-size:26px;background:var(--red);color:var(--paper);-webkit-text-stroke:1.5px var(--ink);paint-order:stroke fill;
-  padding:6px 18px;border:4px solid var(--ink);border-radius:999px;box-shadow:5px 5px 0 var(--ink);transform:rotate(-4deg);margin-bottom:18px}
-.mascot{position:relative}
-#jar{width:100%;height:auto;display:block;animation:bob 3.5s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1deg)}}
-.nametag{position:absolute;left:2%;bottom:8%;font-family:var(--display);font-size:22px;background:var(--sun);border:4px solid var(--ink);border-radius:12px;padding:4px 14px;box-shadow:4px 4px 0 var(--ink);transform:rotate(-6deg)}
+.topbar{display:flex;justify-content:flex-end;padding:16px 0 0}
+.nerdlink{display:inline-block;font-family:var(--display);font-size:19px;background:var(--paper);border:4px solid var(--ink);
+  border-radius:999px;padding:7px 20px;box-shadow:4px 4px 0 var(--ink);text-decoration:none;color:var(--ink)}
+.nerdlink:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
 
-h2{font-family:var(--display);font-weight:400;font-size:clamp(38px,6vw,64px);line-height:.95;margin:0 0 22px;color:var(--paper);
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;padding:20px 0 48px}
+.ticker{display:inline-block;font-family:var(--display);font-size:26px;background:var(--red);color:var(--paper);
+  -webkit-text-stroke:1.5px var(--ink);paint-order:stroke fill;padding:6px 20px;border:4px solid var(--ink);
+  border-radius:999px;box-shadow:5px 5px 0 var(--ink);transform:rotate(-4deg);margin-bottom:20px}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(62px,11vw,136px);line-height:.84;margin:0;color:var(--paper);
+  -webkit-text-stroke:5px var(--ink);paint-order:stroke fill;text-shadow:9px 9px 0 var(--ink);transform:rotate(-3deg)}
+.hero img{display:block;animation:bob 3.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-12px) rotate(1deg)}}
+
+h2{font-family:var(--display);font-weight:400;font-size:clamp(36px,6vw,62px);line-height:.95;margin:0 0 24px;color:var(--paper);
   -webkit-text-stroke:3px var(--ink);paint-order:stroke fill;text-shadow:5px 5px 0 var(--ink)}
-section{padding:44px 0}
+section{padding:40px 0}
 
-.meme{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;padding:0}
-.panel{padding:26px;display:flex;flex-direction:column;gap:12px;min-height:220px}
-.panel+.panel{border-left:4px solid var(--ink)}
-.panel.bad{background:#FFE3E3}
-.panel.good{background:#E3FFE9}
-.panel .who{font-family:var(--display);font-size:22px}
-.panel .say{font-size:22px;font-weight:800;line-height:1.2}
-.panel .emoji{font-size:64px;line-height:1;margin-top:auto}
+.comic{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.comic img{display:block;width:100%;border-radius:18px}
 
-.stickers{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-.sticker{padding:22px}
-.sticker:nth-child(1){transform:rotate(-2deg);background:var(--sun)}
-.sticker:nth-child(2){transform:rotate(1.5deg)}
-.sticker:nth-child(3){transform:rotate(-1deg);background:var(--grass)}
-.sticker .icon{font-size:44px;line-height:1;margin-bottom:8px}
-.sticker h3{font-family:var(--display);font-weight:400;font-size:28px;line-height:1;margin:0 0 8px}
-.sticker p{margin:0;font-weight:600}
+.cast{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.who{padding:16px;text-align:center}
+.who img{display:block;margin:0 auto 6px}
+.who h3{font-family:var(--display);font-weight:400;font-size:24px;margin:0 0 8px}
+.who p{margin:0;font-weight:600;font-size:15px;line-height:1.45}
+.who:nth-child(1){transform:rotate(-1.5deg)}
+.who:nth-child(2){transform:rotate(1deg);background:#FFE3E3}
+.who:nth-child(3){transform:rotate(-1deg);background:#E7EDF3}
+.who:nth-child(4){transform:rotate(1.5deg);background:#E3FFE9}
 
-.sim{display:grid;grid-template-columns:310px 1fr;gap:26px;align-items:start}
-.controls{padding:22px}
-.ctl{margin-bottom:18px}
-.ctl label{display:flex;justify-content:space-between;font-weight:800;margin-bottom:4px}
-.ctl output{font-family:var(--display);font-size:20px;color:var(--red);-webkit-text-stroke:1px var(--ink);paint-order:stroke fill}
-.ctl input[type=range]{width:100%;accent-color:var(--red)}
-.ctl .hint{font-size:14px;color:var(--muted)}
-.check{display:flex;gap:10px;align-items:flex-start;font-weight:800}
-.check input{width:22px;height:22px;margin-top:2px;accent-color:var(--red)}
-.feed{width:100%;font:400 26px var(--display);padding:14px;background:var(--sun);color:var(--ink);border:4px solid var(--ink);border-radius:999px;box-shadow:5px 5px 0 var(--ink);cursor:pointer;transition:transform .08s,box-shadow .08s}
-.feed:active{transform:translate(4px,4px);box-shadow:1px 1px 0 var(--ink)}
-.out{padding:18px}
-.chartbox{overflow-x:auto}
-#chart{width:100%;min-width:520px;height:auto;display:block}
-.legend{display:flex;gap:18px;flex-wrap:wrap;font-weight:800;font-size:15px;margin:8px 0 16px}
-.legend span::before{content:"";display:inline-block;width:22px;height:6px;border-radius:3px;border:2px solid var(--ink);margin-right:7px;vertical-align:middle;background:var(--c)}
-.results{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.res{border:4px solid var(--ink);border-radius:16px;padding:14px;background:var(--paper)}
-.res.us{background:var(--sun);transform:rotate(-1.5deg)}
-.res h4{margin:0 0 6px;font-family:var(--display);font-weight:400;font-size:20px}
-.res .big{font-family:var(--display);font-size:46px;line-height:1}
-.res .sub{font-size:14px;font-weight:600;margin-top:6px}
-.verdict{margin:18px 0 0;font-size:19px;font-weight:800}
+.pitch{padding:30px 26px;font-size:clamp(20px,2.6vw,27px);font-weight:800;line-height:1.35;text-align:center}
+.pitch .sell{display:block;margin-top:14px;font-size:19px;font-weight:700;color:var(--muted)}
+.pitch a{color:var(--ink)}
 
-.two{display:grid;grid-template-columns:1fr 1fr;gap:26px}
-.two h3{font-family:var(--display);font-weight:400;font-size:30px;margin:0 0 14px}
-.nope{padding:26px}
-.nope ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
-.nope li{display:grid;grid-template-columns:44px 1fr;gap:10px;font-size:18px;font-weight:600}
-.nope li::before{content:"🚫";font-size:30px;line-height:1}
-.nope.yes li::before{content:"✅"}
-.nope b{font-weight:800}
+.packgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.sticker{padding:12px;text-align:center;background:var(--paper)}
+.sticker img{display:block;width:100%}
+.sticker a{display:block;margin-top:6px;font-family:var(--display);font-size:16px;color:var(--ink);text-decoration:none}
+.sticker a:hover{text-decoration:underline}
+.getall{display:inline-block;margin-top:24px;font-family:var(--display);font-size:26px;background:var(--sun);color:var(--ink);
+  border:4px solid var(--ink);border-radius:999px;padding:12px 28px;box-shadow:6px 6px 0 var(--ink);text-decoration:none}
+.getall:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--ink)}
+.packnote{margin:14px 0 0;font-weight:600;color:var(--muted);font-size:15px}
 
-ol.recipe{list-style:none;counter-reset:s;margin:0;padding:26px;display:grid;gap:16px}
-ol.recipe li{counter-increment:s;display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:start;font-weight:600}
-ol.recipe li::before{content:counter(s);font-family:var(--display);font-size:28px;width:46px;height:46px;display:grid;place-items:center;background:var(--red);color:var(--paper);-webkit-text-stroke:1px var(--ink);paint-order:stroke fill;border:3px solid var(--ink);border-radius:50%}
-ol.recipe b{display:block;font-family:var(--display);font-weight:400;font-size:22px}
-
-.mech{display:grid;grid-template-columns:1.15fr 1fr;gap:26px;align-items:start}
-.mech .card{padding:26px}
-.mech p{margin:0 0 14px;font-size:18px}
-.mech p:last-child{margin-bottom:0}
-.mech h3{font-family:var(--display);font-weight:400;font-size:30px;margin:0 0 14px}
-.oneway{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;align-items:center;margin:0 0 18px;padding:14px 18px;font-weight:700;background:var(--sky);border:3px solid var(--ink);border-radius:14px}
-.oneway dd{margin:0}
-.oneway dt{font-family:var(--display);font-size:22px;color:var(--red);-webkit-text-stroke:1px var(--ink);paint-order:stroke fill}
-.ratchet{width:100%;border-collapse:collapse;font-weight:700;margin-top:6px}
-.ratchet th{text-align:left;font-family:var(--display);font-weight:400;font-size:17px;padding:0 10px 8px 0;border-bottom:3px solid var(--ink)}
-.ratchet td{padding:9px 10px 9px 0;border-bottom:2px dashed rgba(19,36,59,.22);font-variant-numeric:tabular-nums}
-.ratchet tr:last-child td{border-bottom:0}
-.ratchet .now{background:var(--sun)}
-.caveat{margin:14px 0 0;font-size:15px;font-weight:600;color:var(--muted)}
-footer{padding:30px 0 54px}
+footer{padding:24px 0 56px}
 footer .card{padding:22px;font-size:15px}
 footer p{margin:0 0 10px}
+footer a{color:var(--ink)}
 
-@media (max-width:860px){
-  .hero{grid-template-columns:1fr;padding-top:28px}
-  .hero .bubble::after{display:none}
-  .mascot{max-width:360px;margin:0 auto}
-  .stickers,.two,.results,.sim,.meme,.mech{grid-template-columns:1fr}
-  .panel+.panel{border-left:0;border-top:4px solid var(--ink)}
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;padding-top:10px}
+  .hero .mascot{max-width:330px;margin:0 auto}
+  .comic,.cast,.packgrid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .comic,.cast{grid-template-columns:1fr}
+  .packgrid{grid-template-columns:1fr 1fr}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -147,224 +104,94 @@ footer p{margin:0 0 10px}
 <div class="marquee" aria-hidden="true"><div id="mq"></div></div>
 
 <div class="wrap">
+  <div class="topbar"><a class="nerdlink" href="nerd.html">how it actually works &rarr;</a></div>
+
   <header class="hero">
     <div>
       <div class="ticker">$NOBACKSIES</div>
-      <h1>NO BACKSIES.</h1>
-      <div class="card bubble">Jarold is a jar with the lid welded shut. Every trade makes him heavier, and <b>nobody can ever take the liquidity out</b> — not the dev, not the team, not us. That is a floor under the pool. It is not a promise about the price.</div>
+      <h1>NO<br>BACKSIES.</h1>
     </div>
-    <div class="mascot">
-      <svg id="jar" viewBox="0 0 400 420" role="img" aria-label="Jarold, a grumpy cartoon jar with a padlocked lid, filling up with coins as trades happen"></svg>
-      <div class="nametag">Jarold</div>
-    </div>
+    <div class="mascot"><img src="assets/logo.png" width="1000" height="1000" alt="Jarold, a grumpy cartoon jar with a padlocked lid, full of coins"></div>
   </header>
 
   <section>
-    <h2>Other coins vs Jarold</h2>
-    <div class="card meme">
-      <div class="panel bad"><div class="who">Other coins</div><div class="say">"ok I'm taking the liquidity back"</div><div>*pulls the pool* *posts "it was a social experiment"*</div><div class="emoji">🏃💨</div></div>
-      <div class="panel good"><div class="who">Jarold</div><div class="say">"NO BACKSIES."</div><div>*lid welded shut* *every trade makes the jar heavier* *there is no withdraw button to press*</div><div class="emoji">🫙🔒</div></div>
+    <h2>The whole idea</h2>
+    <div class="comic">
+      <img src="assets/comic/comic-1.png" width="420" height="500" alt="Panel one. A kid drops a coin into Jarold and says: here you go!">
+      <img src="assets/comic/comic-2.png" width="420" height="500" alt="Panel two. The kid reaches back in and says: actually, can i have that back">
+      <img src="assets/comic/comic-3.png" width="420" height="500" alt="Panel three. Jarold folds his arms and says: NO BACKSIES.">
     </div>
   </section>
 
   <section>
-    <h2>Playground rules</h2>
-    <div class="stickers">
-      <div class="card sticker"><div class="icon">🪙</div><h3>The jar only fills</h3><p>After graduation the pool runs in compounding mode. <b>Half</b> the pool’s share of every swap fee is added straight back into the pool’s SOL and can never be drawn out. The other half is claimable by us — that is how this gets funded, and it is stated plainly below.</p></div>
-      <div class="card sticker"><div class="icon">🔒</div><h3>Nobody can empty it</h3><p>100% of the LP is permanently locked — not vested, not timelocked. There is no withdraw instruction anyone can call. That includes us, and we cannot change our minds later.</p></div>
-      <div class="card sticker"><div class="icon">⚠️</div><h3>It will not stop a dump</h3><p>A fuller jar does <b>not</b> make a sell-off hurt less. The same dump moves the price by the same percentage whether the jar holds 110 SOL or 2,110 SOL. We measured it. Anyone holding tokens can still sell into the jar.</p></div>
+    <div class="card pitch">
+      A meme coin where the liquidity is locked forever &mdash; nobody can take it back out, not even us.
+      <span class="sell">You can sell any time. It&rsquo;s the liquidity that&rsquo;s locked, not your tokens.
+      <br>The numbers, the fees we earn and everything we can&rsquo;t promise live in <a href="nerd.html">the nerd corner</a>.</span>
     </div>
   </section>
 
   <section>
-    <h2>What Jarold actually is</h2>
-    <div class="mech">
-      <div class="card">
-        <h3>A pool with a ratchet</h3>
-        <p>Strip the cartoon off and there is one mechanism here. A normal AMM collects a fee on every swap and parks it in a balance somebody can later claim. Jarold’s pool is set to <b>compounding mode</b>, so the pool’s share of that fee is added back to the liquidity itself — and the LP position holding it is <b>permanently locked</b>, so there is no instruction anyone can call to take it back out.</p>
-        <p>Together those two settings make pool depth a one-way function:</p>
-        <dl class="oneway">
-          <dt>in</dt><dd>every swap, forever</dd>
-          <dt>out</dt><dd>nothing, for anyone, ever</dd>
-        </dl>
-        <p class="caveat">Compounding mode is Meteora’s feature, not ours. What is unusual is pairing it with a full permanent lock — normally fees are compounded <i>so that</i> someone can eventually withdraw a bigger position. Removing that exit is the whole idea.</p>
+    <h2>The playground</h2>
+    <div class="cast">
+      <div class="card who">
+        <img src="assets/cast/cast-jarold.png" width="420" height="420" alt="Jarold">
+        <h3>Jarold</h3>
+        <p>A jar with a padlock and a grudge. Things go in. Nothing comes out. He didn&rsquo;t make the rules, but he does enforce them.</p>
       </div>
-      <div class="card">
-        <h3>What that actually does</h3>
-        <p>Meteora adds the compounded fee to the pool’s <b>SOL</b> only — never to the token side. The pool holds more SOL against the same tokens, so the price rises. It does <b>not</b> make a sell-off hurt less: how far a dump moves the price depends on the token side, which never grows.</p>
-        <table class="ratchet">
-          <tr><th>round-trip volume</th><th>SOL in pool</th><th>price</th><th>to us</th><th>2% dump</th></tr>
-          <tr class="now"><td>at launch</td><td>110 SOL</td><td>1.00×</td><td>0 SOL</td><td>−18.8%</td></tr>
-          <tr><td>5,000 SOL</td><td>129 SOL</td><td>1.17×</td><td>20 SOL</td><td>−18.8%</td></tr>
-          <tr><td>25,000 SOL</td><td>206 SOL</td><td>1.88×</td><td>100 SOL</td><td>−18.8%</td></tr>
-          <tr><td>100,000 SOL</td><td>500 SOL</td><td>4.56×</td><td>398 SOL</td><td>−18.8%</td></tr>
-        </table>
-        <p class="caveat">Equal buys and sells, no net buying. A pool that pays all its fees out ends every row at 110&nbsp;SOL and 1.00×. The “to us” column is the half we claim — 0.4% of volume — and we would rather print it than have you find it. The dump column does not move: a fuller jar is not protection. Assumes the pool keeps 80% after Meteora’s cut, which we have not measured, and the pool’s SOL still falls if people are net sellers.</p>
+      <div class="card who">
+        <img src="assets/cast/cast-tim.png" width="420" height="420" alt="Takesie Tim">
+        <h3>Takesie Tim</h3>
+        <p>Gives you something, then wants it back ten minutes later. Has &ldquo;just this once&rdquo; tattooed somewhere. Every playground has one. So does every token.</p>
       </div>
-    </div>
-  </section>
-
-  <section id="proof">
-    <h2>Fill the jar (toy model)</h2>
-    <div class="sim">
-      <div class="card controls">
-        <div class="ctl"><label for="fee">Jarold's fee <output id="feeO"></output></label><input id="fee" type="range" min="0.25" max="3" step="0.25" value="1"></div>
-        <div class="ctl"><label for="vol">Day-one hype <output id="volO"></output></label><input id="vol" type="range" min="5" max="60" step="5" value="30"><div class="hint">Volume as a multiple of the starting pool.</div></div>
-        <div class="ctl"><label for="dec">Hype fade per day <output id="decO"></output></label><input id="dec" type="range" min="5" max="40" step="5" value="15"></div>
-        <div class="ctl"><label for="whale">Whale dump on day 30 <output id="whaleO"></output></label><input id="whale" type="range" min="1" max="5" step="0.5" value="2"><div class="hint">Percent of total supply sold at once.</div></div>
-        <button class="feed" id="run">FILL THE JAR 🫙</button>
+      <div class="card who">
+        <img src="assets/cast/cast-lenny.png" width="420" height="420" alt="Line-Cutter Lenny">
+        <h3>Line-Cutter Lenny</h3>
+        <p>A bot with no legs and no shame. Gets to the front of every queue before anyone else has their shoes on. Nobody has worked out how to stop him &mdash; Jarold just sighs and writes it down.</p>
       </div>
-      <div class="card out">
-        <div class="chartbox"><svg id="chart" viewBox="0 0 640 320" role="img" aria-label="Pool depth over 30 days for three fee models"></svg></div>
-        <div class="legend"><span style="--c:var(--red)">Jarold</span><span style="--c:var(--sun)">Normal pump.fun coin</span><span style="--c:#9AA6B5">Fees leave the pool</span></div>
-        <div class="results" id="results"></div>
-        <p class="verdict" id="verdict"></p>
+      <div class="card who">
+        <img src="assets/cast/cast-tilda.png" width="420" height="420" alt="Toll Tilda">
+        <h3>Toll Tilda</h3>
+        <p>Runs the tollbooth by the gate. The toll opens steep &mdash; 10% in the first seconds, falling to 1% within the hour &mdash; and she&rsquo;ll tell you the exact number before you ask. It&rsquo;s all on the board in <a href="nerd.html">the nerd corner</a>.</p>
       </div>
     </div>
   </section>
 
   <section>
-    <h2>Jarold's honesty corner</h2>
-    <div class="two">
-      <div class="card nope yes"><h3>What the model shows</h3><ul>
-        <li><span><b>Fees that stay make the pool deeper.</b> Same trades, bigger pool. Run it yourself above.</span></li>
-        <li><span><b>The same volume leaves the pool richer.</b> 5,000&nbsp;SOL of round-trip trading leaves 129&nbsp;SOL in the pool against 110&nbsp;SOL in one that pays all its fees out.</span></li>
-        <li><span><b>Jarold fills faster</b> than a pool that pays its fees out — under this model’s assumptions, which we picked. It is a sketch of the mechanism, not a forecast.</span></li>
-      </ul></div>
-      <div class="card nope"><h3>Jarold will not promise</h3><ul>
-        <li><span><b>That nobody is paid.</b> We take <b>half the pool’s share of the post-graduation fee</b> — about 0.4% of all volume — as claimable fees on the locked position, plus the bonding-curve fees during the first hour. The liquidity itself stays locked forever and we can never withdraw it. We are not pretending this is charity; the numbers are in the table above.</span></li>
-        <li><span><b>That you can’t get dumped on.</b> At graduation about <b>82% of the supply is held by curve buyers</b> and only 18% sits in the locked jar. The lock stops the jar being emptied; it does nothing about that 82%. Someone who buys early and sells later is selling <i>into</i> the jar, not taking it.</span></li>
-        <li><span><b>That one wallet can’t do it alone.</b> The whole curve graduates on about <b>122&nbsp;SOL</b>, and nothing in Meteora’s program caps a single buyer — one wallet can fill it in a single transaction. The amount-based fee limiter that would price that in is deprecated and unavailable to new launches.</span></li>
-        <li><span><b>Number go up.</b> Nobody knows that. Anyone who says they do is lying.</span></li>
-        <li><span><b>A stable price.</b> A fuller jar does not make dumps hurt less, and it does not stop them. The fee lands on the SOL side only, and a dump's size is set by the token side.</span></li>
-        <li><span><b>That people will trade.</b> Higher fees scare some bots off. The sim doesn't model that.</span></li>
-        <li><span><b>That the early fee stops snipers.</b> It taxes their stake, not their size. A 15&nbsp;SOL buy in the first block still clears a large profit on the way up. Nothing available in the program caps a single buyer.</span></li>
-        <li><span><b>That compounding can never be switched off.</b> Our config is permanent, but <code>compounding_fee_bps</code> becomes ordinary pool state at migration, and Meteora's already-deployed <code>update_pool_fees</code> instruction can turn it down — no program upgrade required. Both programs are also upgradeable by their own authority. We hold neither key, and we cannot stop either.</span></li>
-        <li><span><b>That the whole fee compounds.</b> Meteora's protocol cut comes out first. We compound 100% of what is left, and will publish the measured cut after devnet.</span></li>
-        <li><span><b>That fees compound before graduation.</b> Compounding only exists in the DAMM v2 pool. On the bonding curve itself, fees go to a fee claimer — the chain has no way to route them into the curve. We will publish that address before launch.</span></li>
-      </ul></div>
-    </div>
-  </section>
-
-  <section>
-    <h2>How Jarold gets built</h2>
-    <ol class="card recipe">
-      <li><div><b>Bonding curve launch</b>Meteora's Dynamic Bonding Curve sells the first tokens from a 1B supply. No custom contract to audit.</div></li>
-      <li><div><b>Authorities burned at mint</b>Minted with <code>tokenAuthorityOption: Immutable</code>, so there is no mint authority. We verify mint, freeze and metadata authority are all null on devnet before launching.</div></li>
-      <li><div><b>Fee opens at 10%, decays to 1%</b>Exponential, 60 steps over the first hour. These fees do <b>not</b> go into the jar — compounding only exists after graduation, so curve-phase fees go to our fee claimer. The earliest buyers pay <b>us</b> the most, not the pool. It is a tax on early entries, not a cap on them; Meteora’s amount-based limiter is deprecated and unavailable to new launches.</div></li>
-      <li><div><b>Graduate into a compounding pool</b>A DAMM v2 pool at 1% base fee (plus up to 0.19% volatility fee) in compounding mode, so the pool’s share of the fee is added back to liquidity.</div></li>
-      <li><div><b>Lock 100% of liquidity, permanently</b>Not vested, not timelocked — permanent, with no withdraw path for us or anyone else. Meteora’s own programs are upgradeable and its operators can still retune a live pool, so the code reading our config can change even though the config cannot.</div></li>
-      <li><div><b>Test on devnet first</b>Every parameter above is validated by the SDK's own validator and simulated on devnet before anything goes live.</div></li>
-    </ol>
+    <h2>Sticker pack</h2>
+    <div class="packgrid" id="pack"></div>
+    <p style="text-align:center"><a class="getall" href="assets/stickers/nobacksies-stickers.zip" download>download all 8 &#x1F4E6;</a></p>
+    <p class="packnote">512&times;512 PNG with transparent backgrounds, ready for Telegram. The SVGs are in the zip too. Use them for anything.</p>
   </section>
 
   <footer>
     <div class="card">
-      <p><b>$NOBACKSIES doesn't exist yet.</b> The numbers above come from a toy model, not from the token — it has not launched, so there is nothing to measure. This is a concept page, not an offer to buy anything. Meme coins are speculative and most go to zero. Jarold is a cartoon, not financial advice.</p>
-      <p>Sim assumptions: it models the graduated pool only — the bonding-curve phase happens before this pool exists, and its fees go to our fee claimer, not here. 100 SOL starting pool against 20% of supply, random trades of 0.1–5 SOL where buyers and sellers pull price back toward its start (so the pool is never drained by a random crash), half of the pool's fee share compounded (compoundingFeeBps 5000), against 80% assumed kept after Meteora's cut. That 80% is the bonding-curve constant, not a measured value for the compounding pool — the real protocol cut is a Meteora pool parameter we have not yet read. Averaged over 12 runs. Growth is measured as √(x·y), so price drift doesn't count.</p>
+      <p><b>Not launched yet.</b> There is no token. Nothing here is financial advice. Meme coins are speculative and most go to zero.</p>
+      <p>The dev earns a disclosed share of trading fees &mdash; the exact numbers are in <a href="nerd.html">the nerd corner</a>, along with everything we can&rsquo;t promise. Jarold is a cartoon.</p>
     </div>
   </footer>
 </div>
 
 <script>
 (function(){
-  const $=id=>document.getElementById(id);
-  $("mq").textContent="$NOBACKSIES ✦ NO BACKSIES ✦ THE JAR ONLY GETS DEEPER ✦ YOU PUT IT IN, IT STAYS IN ✦ LP LOCKED FOREVER ✦ PROTECTS THE LIQUIDITY, NOT THE PRICE ✦ NO TOKEN YET, CALM DOWN ✦ ".repeat(6);
+  document.getElementById("mq").textContent =
+    "$NOBACKSIES ✦ NO BACKSIES ✦ YOU PUT IT IN, IT STAYS IN ✦ YOU CAN SELL ANY TIME ✦ THE LIQUIDITY IS LOCKED, NOT YOUR TOKENS ✦ NO TOKEN YET, CALM DOWN ✦ ".repeat(6);
 
-  const fmt={fee:v=>v+"%",vol:v=>v+"×",dec:v=>v+"%",whale:v=>v+"%"};
-  Object.keys(fmt).forEach(k=>{const el=$(k),o=$(k+"O");const u=()=>o.textContent=fmt[k](el.value);el.addEventListener("input",u);u();});
-
-  function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
-  const S0=100,T0=200e6,SUPPLY=1e9,DAYS=30,SEEDS=12,P0=S0/T0;
-  function run(fee,stay,d1,decay,seed){
-    const r=rng(seed);let S=S0,T=T0;const L0=Math.sqrt(S*T),out=[];
-    for(let d=0;d<DAYS;d++){
-      const vol=d1*S0*Math.pow(1-decay,d);let done=0,n=0;
-      while(done<vol){
-        const sz=0.1+r()*4.9,pb=Math.min(.9,Math.max(.1,.5-.5*Math.log((S/T)/P0))),buy=r()<pb;
-        const f=fee;
-        if(buy){const fe=sz*f,net=sz-fe,o=T*net/(S+net);S+=net+fe*stay;T-=o;}
-        else{const tin=sz*T/S,o=S*tin/(T+tin),fe=o*f;S-=o;T+=tin;S+=fe*stay;}
-        done+=sz;n++;
-      }
-      out.push(Math.sqrt(S*T)/L0);
-    }
-    return out;
-  }
-  function avg(fee,stay,d1,decay){const a=new Array(DAYS).fill(0);for(let s=1;s<=SEEDS;s++)run(fee,stay,d1,decay,s*97).forEach((v,i)=>a[i]+=v/SEEDS);return a;}
-  // Compounding credits the SOL side only (cp-amm applySwapResult), so the token
-  // reserve never grows and dump impact is identical for all three series.
-  const dump=(L,w)=>{const x=SUPPLY*w/100;return(1-Math.pow(T0/(T0+x),2))*100;};
-
-  function drawChart(series){
-    const W=640,H=320,P={l:50,r:16,t:16,b:38};
-    const max=Math.max(1.1,...series.flatMap(s=>s.d))*1.05;
-    const x=i=>P.l+(i/(DAYS-1))*(W-P.l-P.r), y=v=>P.t+(1-(v-1)/(max-1))*(H-P.t-P.b);
-    let g="";const step=max>2?0.5:0.1;
-    for(let v=1;v<=max+1e-9;v+=step){
-      g+=`<line x1="${P.l}" x2="${W-P.r}" y1="${y(v)}" y2="${y(v)}" stroke="#13243B" stroke-opacity=".12" stroke-width="2" stroke-dasharray="4 6"/>`+
-         `<text x="${P.l-8}" y="${y(v)+5}" text-anchor="end" font-size="14" font-weight="800" fill="#13243B" font-family="Rubik, sans-serif">+${((v-1)*100).toFixed(0)}%</text>`;
-    }
-    [1,10,20,30].forEach(d=>g+=`<text x="${x(d-1)}" y="${H-12}" text-anchor="${d===30?'end':d===1?'start':'middle'}" font-size="14" font-weight="800" fill="#13243B" font-family="Rubik, sans-serif">day ${d}</text>`);
-    series.forEach(s=>{
-      const pts=s.d.map((v,i)=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
-      g+=`<polyline points="${pts}" fill="none" stroke="#13243B" stroke-width="${s.w+4}" stroke-linejoin="round" stroke-linecap="round"/>`+
-         `<polyline points="${pts}" fill="none" stroke="${s.c}" stroke-width="${s.w}" stroke-linejoin="round" stroke-linecap="round"/>`;
-    });
-    $("chart").innerHTML=g;
-  }
-
-  function drawJar(growth){
-    const ink="#13243B";
-    const fill=Math.min(0.96,0.2+growth*0.85);           // share of jar filled with coins
-    const top=110, bottom=370, h=(bottom-top-20)*fill, cy0=bottom-18;
-    let coins="";const rows=Math.max(1,Math.round(h/16));
-    for(let i=0;i<rows;i++){
-      const y=cy0-i*16, n=i%2?5:6, off=i%2?24:0;
-      for(let j=0;j<n;j++){const cx=118+off+j*42+((i*7+j*13)%9)-4;coins+=`<ellipse cx="${cx}" cy="${y}" rx="22" ry="9" fill="#FFD43B" stroke="${ink}" stroke-width="3"/>`;}
-    }
-    $("jar").innerHTML=`
-      <defs><clipPath id="jc"><rect x="86" y="${top}" width="228" height="${bottom-top}" rx="40"/></clipPath></defs>
-      <ellipse cx="200" cy="398" rx="140" ry="14" fill="${ink}" opacity=".18"/>
-      <rect x="86" y="${top}" width="228" height="${bottom-top}" rx="40" fill="#E8F6FF" stroke="${ink}" stroke-width="6"/>
-      <g clip-path="url(#jc)">${coins}</g>
-      <rect x="86" y="${top}" width="228" height="${bottom-top}" rx="40" fill="none" stroke="${ink}" stroke-width="6"/>
-      <path d="M110 ${top+30} Q104 ${top+120} 112 ${top+200}" stroke="#fff" stroke-width="10" stroke-linecap="round" fill="none" opacity=".8"/>
-      <rect x="100" y="70" width="200" height="46" rx="12" fill="#FF5A5F" stroke="${ink}" stroke-width="6"/>
-      <path d="M115 82 V104 M140 82 V104 M165 82 V104 M235 82 V104 M260 82 V104 M285 82 V104" stroke="${ink}" stroke-width="3" opacity=".3"/>
-      <path d="M180 64 V40 a20 20 0 0 1 40 0 V64" fill="none" stroke="${ink}" stroke-width="8"/>
-      <rect x="170" y="58" width="60" height="48" rx="8" fill="#FFD43B" stroke="${ink}" stroke-width="5"/>
-      <circle cx="200" cy="78" r="6" fill="${ink}"/><rect x="197" y="80" width="6" height="14" fill="${ink}"/>
-      <rect x="112" y="136" width="176" height="114" rx="18" fill="#fff" stroke="${ink}" stroke-width="5" transform="rotate(-3 200 193)"/>
-      <g>
-        <ellipse cx="160" cy="180" rx="24" ry="27" fill="#fff" stroke="${ink}" stroke-width="5"/>
-        <ellipse cx="240" cy="180" rx="24" ry="27" fill="#fff" stroke="${ink}" stroke-width="5"/>
-        <circle cx="166" cy="188" r="10" fill="${ink}"/><circle cx="234" cy="188" r="10" fill="${ink}"/>
-        <path d="M128 148 L188 162" stroke="${ink}" stroke-width="9" stroke-linecap="round"/>
-        <path d="M272 148 L212 162" stroke="${ink}" stroke-width="9" stroke-linecap="round"/>
-        <path d="M175 228 Q200 220 225 230" fill="none" stroke="${ink}" stroke-width="6" stroke-linecap="round"/>
-      </g>
-      <path d="M60 300 Q120 250 230 268" fill="none" stroke="${ink}" stroke-width="14" stroke-linecap="round"/>
-      <path d="M340 300 Q280 250 170 268" fill="none" stroke="${ink}" stroke-width="14" stroke-linecap="round"/>
-      <path d="M60 300 Q120 250 230 268" fill="none" stroke="#FFB58A" stroke-width="6" stroke-linecap="round"/>
-      <path d="M340 300 Q280 250 170 268" fill="none" stroke="#FFB58A" stroke-width="6" stroke-linecap="round"/>`;
-  }
-
-  function go(){
-    const fee=+$("fee").value/100,d1=+$("vol").value,decay=+$("dec").value/100,whale=+$("whale").value;
-    // compoundingFeeBps is 5000, so only HALF the pool's fee share compounds.
-    // 0.8 would model 10000 bps and overstate the jar by 2x.
-    const jar=avg(fee,0.4,d1,decay),pump=avg(0.0025,0.8,d1,decay),exit=avg(0.0025,0,d1,decay);
-    drawChart([{d:exit,c:"#9AA6B5",w:4},{d:pump,c:"#FFD43B",w:5},{d:jar,c:"#FF5A5F",w:7}]);
-    const L=[jar[DAYS-1],pump[DAYS-1],exit[DAYS-1]];
-    const rows=[["Jarold 🫙",L[0],"us"],["Normal coin",L[1],""],["Fees leave",L[2],""]];
-    $("results").innerHTML=rows.map(([n,l,c])=>`<div class="res ${c}"><h4>${n}</h4><div class="big">+${((l-1)*100).toFixed(0)}%</div><div class="sub">bigger pool after 30 days. A ${whale}% dump moves price ${dump(l,whale).toFixed(1)}% in every case.</div></div>`).join("");
-    const ratio=(L[1]-1)>0?(L[0]-1)/(L[1]-1):0;
-    $("verdict").textContent=`Jarold's jar filled ${ratio.toFixed(1)}× faster than a normal coin's pool. The ${whale}% dump still moves price ${dump(L[0],whale).toFixed(1)}% either way — a fuller jar is a richer jar, not a safer one. No backsies. 🫙`;
-    drawJar(L[0]-1);
-  }
-  $("run").addEventListener("click",go);
-  go();
+  var PACK = [
+    ["01-no-backsies","NO BACKSIES"],
+    ["02-lives-here-now","it lives here now"],
+    ["03-refund-no","no."],
+    ["04-can-i-have-it-back","can i have it back"],
+    ["05-locked-forever","it's locked. forever."],
+    ["06-pinky-swear","pinky swear."],
+    ["07-wait-your-turn","wait your turn"],
+    ["08-you-put-it-in","you put it in."]
+  ];
+  document.getElementById("pack").innerHTML = PACK.map(function(s){
+    var f = "assets/stickers/" + s[0] + ".png";
+    return '<div class="card sticker"><img src="' + f + '" width="512" height="512" loading="lazy" alt="' + s[1] + '">' +
+           '<a href="' + f + '" download>' + s[1] + '</a></div>';
+  }).join("");
 })();
 </script>
 </body>
