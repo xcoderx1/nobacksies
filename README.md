@@ -133,7 +133,20 @@ Worth stating plainly, because the landing page is a sales pitch and this file i
    and the pool's `protocol_fee_percent` (record the real number — the site's 80% is
    an assumption).
 5. Decide who `FEE_CLAIMER` is and say so publicly before launch, not after.
-   `launch.js` now refuses to run without it rather than defaulting to the payer.
+   `launch.js` refuses to run without it rather than defaulting to the payer.
+
+   **Use a hardware wallet or multisig for this key.** It does two jobs, both
+   permanent: it claims curve-phase fees, and the DBC program assigns it
+   ownership of the migrated DAMM v2 LP position — verified on mainnet
+   migration `48YvT8fe...`, where the position NFT account's owner equalled the
+   config's `feeClaimer` exactly. So it permanently controls all
+   post-graduation income (~0.4% of volume, ongoing). It cannot be changed and
+   nothing recovers it. A hot key on a laptop is the wrong choice here.
+
+   The same lever decides the pitch. An address nobody can sign for makes
+   "nobody takes anything out" literally true and forfeits every lamport of
+   post-graduation income. A wallet you control earns the income and obliges
+   the page to say so. You cannot have both.
 6. Fetch `TOKEN.uri` and assert it returns JSON with the right name/symbol and a live
    image. It is immutable after launch, and nothing recovers a dead link.
 7. `launch.js` refuses a mainnet send unless `I_UNDERSTAND_NO_BACKSIES=yes`. The

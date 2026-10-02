@@ -88,8 +88,14 @@ function preflight(cluster) {
   const stop = []
   if (!TOKEN.uri) stop.push('TOKEN.uri is empty — the token would mint with no image or metadata')
   if (!LEFTOVER_RECEIVER) stop.push('LEFTOVER_RECEIVER is not set')
-  // feeClaimer is burned into an immutable config and is the one address that
-  // can claim curve-phase trading fees. Never let it default silently.
+  // feeClaimer is burned into an immutable config and does TWO jobs:
+  //   1. it is the only address that can claim curve-phase trading fees, and
+  //   2. the DBC program assigns it ownership of the migrated DAMM v2 LP
+  //      position NFT -- verified on mainnet migration 48YvT8fe..., where the
+  //      position NFT account's owner equalled the config's feeClaimer exactly.
+  // So this key permanently controls ALL post-graduation income. It cannot be
+  // changed afterwards and nothing can recover it. Use a hardware wallet or a
+  // multisig, never a hot key on a laptop.
   if (!env('FEE_CLAIMER')) {
     stop.push(
       'FEE_CLAIMER is not set. It is written into the immutable config and is the ' +
@@ -152,6 +158,13 @@ async function main() {
   console.log(`  base mint    ${baseMint.kp.publicKey.toBase58()}  ${baseMint.reused ? '(reused from .keys)' : '(new, saved to .keys)'}`)
   console.log(`  quote mint   ${QUOTE_MINT}`)
   console.log(`  fee claimer  ${feeClaimer.toBase58()}`)
+  if (feeClaimer.equals(payer.publicKey)) {
+    console.log('')
+    console.log('  \u26a0  FEE_CLAIMER is the same key as the payer.')
+    console.log('     This key will permanently own the migrated LP position and all')
+    console.log('     post-graduation fee income. It can never be changed. If you lose')
+    console.log('     it, that income is gone forever. Use a hardware wallet or multisig.')
+  }
   console.log(`  mode         ${SEND ? 'SEND' : 'dry-run (simulate only)'}\n`)
 
   // If the config account already exists, the launch already happened. Resending
