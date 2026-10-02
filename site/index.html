@@ -170,7 +170,7 @@ footer p{margin:0 0 10px}
   <section>
     <h2>Playground rules</h2>
     <div class="stickers">
-      <div class="card sticker"><div class="icon">🪙</div><h3>The jar only fills</h3><p>After graduation the pool runs in compounding mode: the pool’s share of every swap fee is added straight back into the pool’s SOL, instead of to a fee wallet. Nobody can draw it out again.</p></div>
+      <div class="card sticker"><div class="icon">🪙</div><h3>The jar only fills</h3><p>After graduation the pool runs in compounding mode. <b>Half</b> the pool’s share of every swap fee is added straight back into the pool’s SOL and can never be drawn out. The other half is claimable by us — that is how this gets funded, and it is stated plainly below.</p></div>
       <div class="card sticker"><div class="icon">🔒</div><h3>Nobody can empty it</h3><p>100% of the LP is permanently locked — not vested, not timelocked. There is no withdraw instruction anyone can call. That includes us, and we cannot change our minds later.</p></div>
       <div class="card sticker"><div class="icon">⚠️</div><h3>It will not stop a dump</h3><p>A fuller jar does <b>not</b> make a sell-off hurt less. The same dump moves the price by the same percentage whether the jar holds 110 SOL or 2,110 SOL. We measured it. Anyone holding tokens can still sell into the jar.</p></div>
     </div>
@@ -191,15 +191,15 @@ footer p{margin:0 0 10px}
       </div>
       <div class="card">
         <h3>What that actually does</h3>
-        <p>Meteora adds the compounded fee to the pool’s <b>SOL</b> only — never to the token side. So the pool holds more SOL against the same tokens, and the price rises. It does <b>not</b> make a sell-off hurt less: how far a dump moves the price depends on the token side, which never grows.</p>
+        <p>Meteora adds the compounded fee to the pool’s <b>SOL</b> only — never to the token side. The pool holds more SOL against the same tokens, so the price rises. It does <b>not</b> make a sell-off hurt less: how far a dump moves the price depends on the token side, which never grows.</p>
         <table class="ratchet">
-          <tr><th>round-trip volume</th><th>SOL in pool</th><th>price</th><th>2%-supply dump</th></tr>
-          <tr class="now"><td>at launch</td><td>110 SOL</td><td>1.00×</td><td>−18.8%</td></tr>
-          <tr><td>5,000 SOL</td><td>148 SOL</td><td>1.35×</td><td>−18.8%</td></tr>
-          <tr><td>25,000 SOL</td><td>304 SOL</td><td>2.77×</td><td>−18.8%</td></tr>
-          <tr><td>100,000 SOL</td><td>895 SOL</td><td>8.17×</td><td>−18.8%</td></tr>
+          <tr><th>round-trip volume</th><th>SOL in pool</th><th>price</th><th>to us</th><th>2% dump</th></tr>
+          <tr class="now"><td>at launch</td><td>110 SOL</td><td>1.00×</td><td>0 SOL</td><td>−18.8%</td></tr>
+          <tr><td>5,000 SOL</td><td>129 SOL</td><td>1.17×</td><td>20 SOL</td><td>−18.8%</td></tr>
+          <tr><td>25,000 SOL</td><td>206 SOL</td><td>1.88×</td><td>100 SOL</td><td>−18.8%</td></tr>
+          <tr><td>100,000 SOL</td><td>500 SOL</td><td>4.56×</td><td>398 SOL</td><td>−18.8%</td></tr>
         </table>
-        <p class="caveat">Equal buys and sells — no net buying at all. A pool that pays its fees out ends every one of those rows at 110&nbsp;SOL and 1.00×. That gap is the entire mechanism. Note the last column does not move: the jar getting fuller is not protection. These figures assume the pool keeps 80% after Meteora’s cut, which we have not measured yet, and the pool’s SOL still falls if people are net sellers.</p>
+        <p class="caveat">Equal buys and sells, no net buying. A pool that pays all its fees out ends every row at 110&nbsp;SOL and 1.00×. The “to us” column is the half we claim — 0.4% of volume — and we would rather print it than have you find it. The dump column does not move: a fuller jar is not protection. Assumes the pool keeps 80% after Meteora’s cut, which we have not measured, and the pool’s SOL still falls if people are net sellers.</p>
       </div>
     </div>
   </section>
@@ -229,10 +229,11 @@ footer p{margin:0 0 10px}
     <div class="two">
       <div class="card nope yes"><h3>What the model shows</h3><ul>
         <li><span><b>Fees that stay make the pool deeper.</b> Same trades, bigger pool. Run it yourself above.</span></li>
-        <li><span><b>The same volume leaves the pool richer.</b> 5,000&nbsp;SOL of round-trip trading leaves 148&nbsp;SOL in a compounding pool and 110&nbsp;SOL in one that pays its fees out.</span></li>
+        <li><span><b>The same volume leaves the pool richer.</b> 5,000&nbsp;SOL of round-trip trading leaves 129&nbsp;SOL in the pool against 110&nbsp;SOL in one that pays all its fees out.</span></li>
         <li><span><b>Jarold fills faster</b> than a pool that pays its fees out — under this model’s assumptions, which we picked. It is a sketch of the mechanism, not a forecast.</span></li>
       </ul></div>
       <div class="card nope"><h3>Jarold will not promise</h3><ul>
+        <li><span><b>That nobody is paid.</b> We take <b>half the pool’s share of the post-graduation fee</b> — about 0.4% of all volume — as claimable fees on the locked position, plus the bonding-curve fees during the first hour. The liquidity itself stays locked forever and we can never withdraw it. We are not pretending this is charity; the numbers are in the table above.</span></li>
         <li><span><b>That you can’t get dumped on.</b> At graduation about <b>82% of the supply is held by curve buyers</b> and only 18% sits in the locked jar. The lock stops the jar being emptied; it does nothing about that 82%. Someone who buys early and sells later is selling <i>into</i> the jar, not taking it.</span></li>
         <li><span><b>That one wallet can’t do it alone.</b> The whole curve graduates on about <b>122&nbsp;SOL</b>, and nothing in Meteora’s program caps a single buyer — one wallet can fill it in a single transaction. The amount-based fee limiter that would price that in is deprecated and unavailable to new launches.</span></li>
         <li><span><b>Number go up.</b> Nobody knows that. Anyone who says they do is lying.</span></li>

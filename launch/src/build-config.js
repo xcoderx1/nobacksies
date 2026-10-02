@@ -92,7 +92,8 @@ function main() {
     null,
     ['migrated pool fee', pct(c.migratedPoolFee.poolFeeBps)],
     ['migrated fee mode', `${c.migratedPoolFee.collectFeeMode} (2 = Compounding)`],
-    ['compoundingFeeBps', c.compoundingFeeBps.toString(10)],
+    ['fee split', `${(Number(c.compoundingFeeBps) / 100).toFixed(0)}% compounds into the pool, ${((10000 - Number(c.compoundingFeeBps)) / 100).toFixed(0)}% claimable`],
+    ['team income', `~${(((10000 - Number(c.compoundingFeeBps)) / 10000) * (c.migratedPoolFee.poolFeeBps / 10000) * 0.8 * 100000).toFixed(0)} SOL per 100,000 SOL of volume (if claimable \u2014 unconfirmed)`],
     ['migrationFeeOption', `${c.migrationFeeOption} (6 = Customizable)`],
     null,
     ['LP permanently locked', `${lockedLp}%`],
@@ -126,7 +127,10 @@ function main() {
   const sched = CURVE.fee.baseFeeParams.feeSchedulerParam
   if (c.migratedPoolFee.collectFeeMode !== 2) fails.push('migrated pool is NOT in compounding mode')
   if (c.migrationFeeOption !== 6) fails.push(`migrationFeeOption is ${c.migrationFeeOption}, not Customizable(6) — the whole migratedPoolFee block is silently zeroed`)
-  if (Number(c.compoundingFeeBps) !== 10000) fails.push(`compoundingFeeBps is ${c.compoundingFeeBps}, not 10000`)
+  // Must be set deliberately: it decides the split between the pool and the
+  // team. 0 would be invalid in Compounding mode; 10000 pays the team nothing.
+  if (Number(c.compoundingFeeBps) !== CURVE.migration.migratedPoolFee.compoundingFeeBps)
+    fails.push(`compoundingFeeBps landed as ${c.compoundingFeeBps}, config says ${CURVE.migration.migratedPoolFee.compoundingFeeBps}`)
   if (lockedLp !== 100) fails.push(`only ${lockedLp}% of LP is permanently locked`)
   if (claimableLp !== 0) fails.push(`${claimableLp}% of LP is withdrawable — that is a backsie`)
   if (c.tokenUpdateAuthority !== 1) fails.push('token authorities are not Immutable')

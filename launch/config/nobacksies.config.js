@@ -95,11 +95,27 @@ export const CURVE = {
       // Must be within [MIN_MIGRATED_POOL_FEE_BPS, MAX_MIGRATED_POOL_FEE_BPS]
       // = [10, 1000]. 100 bps = 1%.
       poolFeeBps: 100,
-      // validateCompoundingFeeBps: when collectFeeMode is Compounding this
-      // must be > 0 and <= 10000. The SDK only range-checks it and passes it
-      // straight to the on-chain program, so the exact split it encodes is
-      // NOT provable from the SDK — the devnet run is what confirms it.
-      compoundingFeeBps: 10_000,
+      // THE SPLIT. cp-amm splitFees (cp-amm-sdk dist/index.js:8231) takes
+      // Meteora's protocol cut first, then divides what is left:
+      //   compoundingFee = tradingFee * compoundingFeeBps / 10000  -> into the pool
+      //   claimingFee    = tradingFee - compoundingFee             -> claimable
+      // validateCompoundingFeeBps requires 0 < bps <= 10000 in Compounding mode.
+      //
+      // 5000 = half the pool's fee share compounds into liquidity, half accrues
+      // as claimable fees on the LP position. At a 1% pool fee that is ~0.4% of
+      // all volume, i.e. ~400 SOL per 100,000 SOL traded.
+      //
+      // The LP stays 100% PERMANENTLY LOCKED either way -- the capital can never
+      // be withdrawn. getUnClaimLpFee sizes a claim with positionLiquidity(),
+      // which includes permanentLockedLiquidity (cp-amm index.js:10856), so a
+      // locked position still earns fees.
+      //
+      // UNRESOLVED: claim_position_fee authorises on the holder of
+      // position_nft_account, and that account is a cp-amm PDA
+      // (derivePositionNftAccount). Whether the partner can sign for the
+      // migrated position is NOT establishable from either SDK. THE DEVNET RUN
+      // MUST CONFIRM IT before this number means anything.
+      compoundingFeeBps: 5_000,
     },
   },
 
