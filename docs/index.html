@@ -212,7 +212,6 @@ footer p{margin:0 0 10px}
         <div class="ctl"><label for="vol">Day-one hype <output id="volO"></output></label><input id="vol" type="range" min="5" max="60" step="5" value="30"><div class="hint">Volume as a multiple of the starting pool.</div></div>
         <div class="ctl"><label for="dec">Hype fade per day <output id="decO"></output></label><input id="dec" type="range" min="5" max="40" step="5" value="15"></div>
         <div class="ctl"><label for="whale">Whale dump on day 30 <output id="whaleO"></output></label><input id="whale" type="range" min="1" max="5" step="0.5" value="2"><div class="hint">Percent of total supply sold at once.</div></div>
-        <div class="ctl"><label class="check"><input id="snipe" type="checkbox" checked> Make snipers pay (10% fee decaying to 1% over the first hour)</label></div>
         <button class="feed" id="run">FILL THE JAR 🫙</button>
       </div>
       <div class="card out">
@@ -237,7 +236,7 @@ footer p{margin:0 0 10px}
         <li><span><b>That you can’t get dumped on.</b> At graduation about <b>82% of the supply is held by curve buyers</b> and only 18% sits in the locked jar. The lock stops the jar being emptied; it does nothing about that 82%. Someone who buys early and sells later is selling <i>into</i> the jar, not taking it.</span></li>
         <li><span><b>That one wallet can’t do it alone.</b> The whole curve graduates on about <b>122&nbsp;SOL</b>, and nothing in Meteora’s program caps a single buyer — one wallet can fill it in a single transaction. The amount-based fee limiter that would price that in is deprecated and unavailable to new launches.</span></li>
         <li><span><b>Number go up.</b> Nobody knows that. Anyone who says they do is lying.</span></li>
-        <li><span><b>A stable price.</b> A fuller jar softens dumps. It doesn't stop them.</span></li>
+        <li><span><b>A stable price.</b> A fuller jar does not make dumps hurt less, and it does not stop them. The fee lands on the SOL side only, and a dump's size is set by the token side.</span></li>
         <li><span><b>That people will trade.</b> Higher fees scare some bots off. The sim doesn't model that.</span></li>
         <li><span><b>That the early fee stops snipers.</b> It taxes their stake, not their size. A 15&nbsp;SOL buy in the first block still clears a large profit on the way up. Nothing available in the program caps a single buyer.</span></li>
         <li><span><b>That compounding can never be switched off.</b> Our config is permanent, but <code>compounding_fee_bps</code> becomes ordinary pool state at migration, and Meteora's already-deployed <code>update_pool_fees</code> instruction can turn it down — no program upgrade required. Both programs are also upgradeable by their own authority. We hold neither key, and we cannot stop either.</span></li>
@@ -262,7 +261,7 @@ footer p{margin:0 0 10px}
   <footer>
     <div class="card">
       <p><b>$NOBACKSIES doesn't exist yet.</b> The numbers above come from a toy model, not from the token — it has not launched, so there is nothing to measure. This is a concept page, not an offer to buy anything. Meme coins are speculative and most go to zero. Jarold is a cartoon, not financial advice.</p>
-      <p>Sim assumptions: 100 SOL starting pool against 20% of supply, random trades of 0.1–5 SOL where buyers and sellers pull price back toward its start (so the pool is never drained by a random crash), 80% of the fee assumed kept by the pool. That 80% is the bonding-curve constant, not a measured value for the compounding pool — the real protocol cut is a Meteora pool parameter we have not yet read. Averaged over 12 runs. Growth is measured as √(x·y), so price drift doesn't count.</p>
+      <p>Sim assumptions: it models the graduated pool only — the bonding-curve phase happens before this pool exists, and its fees go to our fee claimer, not here. 100 SOL starting pool against 20% of supply, random trades of 0.1–5 SOL where buyers and sellers pull price back toward its start (so the pool is never drained by a random crash), half of the pool's fee share compounded (compoundingFeeBps 5000), against 80% assumed kept after Meteora's cut. That 80% is the bonding-curve constant, not a measured value for the compounding pool — the real protocol cut is a Meteora pool parameter we have not yet read. Averaged over 12 runs. Growth is measured as √(x·y), so price drift doesn't count.</p>
     </div>
   </footer>
 </div>
@@ -277,13 +276,13 @@ footer p{margin:0 0 10px}
 
   function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
   const S0=100,T0=200e6,SUPPLY=1e9,DAYS=30,SEEDS=12,P0=S0/T0;
-  function run(fee,stay,snipe,d1,decay,seed){
+  function run(fee,stay,d1,decay,seed){
     const r=rng(seed);let S=S0,T=T0;const L0=Math.sqrt(S*T),out=[];
     for(let d=0;d<DAYS;d++){
       const vol=d1*S0*Math.pow(1-decay,d);let done=0,n=0;
       while(done<vol){
         const sz=0.1+r()*4.9,pb=Math.min(.9,Math.max(.1,.5-.5*Math.log((S/T)/P0))),buy=r()<pb;
-        let f=fee;if(snipe&&d===0&&n<200)f=Math.max(fee,0.10*(1-n/200));
+        const f=fee;
         if(buy){const fe=sz*f,net=sz-fe,o=T*net/(S+net);S+=net+fe*stay;T-=o;}
         else{const tin=sz*T/S,o=S*tin/(T+tin),fe=o*f;S-=o;T+=tin;S+=fe*stay;}
         done+=sz;n++;
@@ -292,7 +291,7 @@ footer p{margin:0 0 10px}
     }
     return out;
   }
-  function avg(fee,stay,snipe,d1,decay){const a=new Array(DAYS).fill(0);for(let s=1;s<=SEEDS;s++)run(fee,stay,snipe,d1,decay,s*97).forEach((v,i)=>a[i]+=v/SEEDS);return a;}
+  function avg(fee,stay,d1,decay){const a=new Array(DAYS).fill(0);for(let s=1;s<=SEEDS;s++)run(fee,stay,d1,decay,s*97).forEach((v,i)=>a[i]+=v/SEEDS);return a;}
   // Compounding credits the SOL side only (cp-amm applySwapResult), so the token
   // reserve never grows and dump impact is identical for all three series.
   const dump=(L,w)=>{const x=SUPPLY*w/100;return(1-Math.pow(T0/(T0+x),2))*100;};
@@ -352,8 +351,10 @@ footer p{margin:0 0 10px}
   }
 
   function go(){
-    const fee=+$("fee").value/100,d1=+$("vol").value,decay=+$("dec").value/100,whale=+$("whale").value,snipe=$("snipe").checked;
-    const jar=avg(fee,0.8,snipe,d1,decay),pump=avg(0.0025,0.8,false,d1,decay),exit=avg(0.0025,0,false,d1,decay);
+    const fee=+$("fee").value/100,d1=+$("vol").value,decay=+$("dec").value/100,whale=+$("whale").value;
+    // compoundingFeeBps is 5000, so only HALF the pool's fee share compounds.
+    // 0.8 would model 10000 bps and overstate the jar by 2x.
+    const jar=avg(fee,0.4,d1,decay),pump=avg(0.0025,0.8,d1,decay),exit=avg(0.0025,0,d1,decay);
     drawChart([{d:exit,c:"#9AA6B5",w:4},{d:pump,c:"#FFD43B",w:5},{d:jar,c:"#FF5A5F",w:7}]);
     const L=[jar[DAYS-1],pump[DAYS-1],exit[DAYS-1]];
     const rows=[["Jarold 🫙",L[0],"us"],["Normal coin",L[1],""],["Fees leave",L[2],""]];
