@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>$NOBACKSIES — playground rules apply</title>
-<meta name="description" content="Jarold is a jar. Liquidity locked forever, token authorities burned, and after graduation every trading fee compounds back into the pool instead of a dev wallet. No backsies.">
+<meta name="description" content="A liquidity pool that can only get deeper, and that nobody can ever withdraw from — including us. Fees compound back into the pool instead of a fee wallet. It protects the liquidity, not the price.">
 <link rel="icon" href="assets/logo.png">
 <link rel="apple-touch-icon" href="assets/logo.png">
 <!-- og:image must be an absolute URL once this is on a real domain;
      replace https://nobacksies.fun with the deployed origin. -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="$NOBACKSIES — playground rules apply">
-<meta property="og:description" content="Liquidity locked forever. Mint authority burned. After graduation, the pool’s share of every swap fee compounds back into the pool.">
+<meta property="og:description" content="A pool that can only get deeper, and that nobody can ever withdraw from — including us. It protects the liquidity, not the price.">
 <meta property="og:image" content="https://nobacksies.fun/assets/banner.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="$NOBACKSIES — playground rules apply">
-<meta name="twitter:description" content="Liquidity locked forever. Mint authority burned. After graduation, the pool’s share of every swap fee compounds back into the pool.">
+<meta name="twitter:description" content="A pool that can only get deeper, and that nobody can ever withdraw from — including us. It protects the liquidity, not the price.">
 <meta name="twitter:image" content="https://nobacksies.fun/assets/banner.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,6 +115,20 @@ ol.recipe li{counter-increment:s;display:grid;grid-template-columns:56px 1fr;gap
 ol.recipe li::before{content:counter(s);font-family:var(--display);font-size:28px;width:46px;height:46px;display:grid;place-items:center;background:var(--red);color:var(--paper);-webkit-text-stroke:1px var(--ink);paint-order:stroke fill;border:3px solid var(--ink);border-radius:50%}
 ol.recipe b{display:block;font-family:var(--display);font-weight:400;font-size:22px}
 
+.mech{display:grid;grid-template-columns:1.15fr 1fr;gap:26px;align-items:start}
+.mech .card{padding:26px}
+.mech p{margin:0 0 14px;font-size:18px}
+.mech p:last-child{margin-bottom:0}
+.mech h3{font-family:var(--display);font-weight:400;font-size:30px;margin:0 0 14px}
+.oneway{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;align-items:center;margin:0 0 18px;padding:14px 18px;font-weight:700;background:var(--sky);border:3px solid var(--ink);border-radius:14px}
+.oneway dd{margin:0}
+.oneway dt{font-family:var(--display);font-size:22px;color:var(--red);-webkit-text-stroke:1px var(--ink);paint-order:stroke fill}
+.ratchet{width:100%;border-collapse:collapse;font-weight:700;margin-top:6px}
+.ratchet th{text-align:left;font-family:var(--display);font-weight:400;font-size:17px;padding:0 10px 8px 0;border-bottom:3px solid var(--ink)}
+.ratchet td{padding:9px 10px 9px 0;border-bottom:2px dashed rgba(19,36,59,.22);font-variant-numeric:tabular-nums}
+.ratchet tr:last-child td{border-bottom:0}
+.ratchet .now{background:var(--sun)}
+.caveat{margin:14px 0 0;font-size:15px;font-weight:600;color:var(--muted)}
 footer{padding:30px 0 54px}
 footer .card{padding:22px;font-size:15px}
 footer p{margin:0 0 10px}
@@ -123,7 +137,7 @@ footer p{margin:0 0 10px}
   .hero{grid-template-columns:1fr;padding-top:28px}
   .hero .bubble::after{display:none}
   .mascot{max-width:360px;margin:0 auto}
-  .stickers,.two,.results,.sim,.meme{grid-template-columns:1fr}
+  .stickers,.two,.results,.sim,.meme,.mech{grid-template-columns:1fr}
   .panel+.panel{border-left:0;border-top:4px solid var(--ink)}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -137,7 +151,7 @@ footer p{margin:0 0 10px}
     <div>
       <div class="ticker">$NOBACKSIES</div>
       <h1>NO BACKSIES.</h1>
-      <div class="card bubble">Jarold is a jar. Every trade drops a coin in. Nothing ever comes out. Not for snipers, not for whales, not even for the dev. Playground rules.</div>
+      <div class="card bubble">Jarold is a jar with the lid welded shut. Every trade makes him heavier, and <b>nobody can ever take the liquidity out</b> — not the dev, not the team, not us. That is a floor under the pool. It is not a promise about the price.</div>
     </div>
     <div class="mascot">
       <svg id="jar" viewBox="0 0 400 420" role="img" aria-label="Jarold, a grumpy cartoon jar with a padlocked lid, filling up with coins as trades happen"></svg>
@@ -149,16 +163,44 @@ footer p{margin:0 0 10px}
     <h2>Other coins vs Jarold</h2>
     <div class="card meme">
       <div class="panel bad"><div class="who">Other coins</div><div class="say">"ok I'm taking the liquidity back"</div><div>*pulls the pool* *posts "it was a social experiment"*</div><div class="emoji">🏃💨</div></div>
-      <div class="panel good"><div class="who">Jarold</div><div class="say">"NO BACKSIES."</div><div>*liquidity locked forever* *jar gets heavier every trade*</div><div class="emoji">🫙🔒</div></div>
+      <div class="panel good"><div class="who">Jarold</div><div class="say">"NO BACKSIES."</div><div>*lid welded shut* *every trade makes the jar heavier* *there is no withdraw button to press*</div><div class="emoji">🫙🔒</div></div>
     </div>
   </section>
 
   <section>
     <h2>Playground rules</h2>
     <div class="stickers">
-      <div class="card sticker"><div class="icon">🪙</div><h3>Every trade drops a coin</h3><p>Once the jar graduates, the pool runs in compounding mode: the pool’s share of every swap fee is added back to liquidity instead of going to a fee wallet. Meteora takes a protocol cut first.</p></div>
-      <div class="card sticker"><div class="icon">🔒</div><h3>Nobody gets backsies</h3><p>100% of liquidity locked forever. No dev, no team, nobody can take it out. Not even if they ask nicely.</p></div>
-      <div class="card sticker"><div class="icon">🤖</div><h3>Snipers pay 10× the fee</h3><p>The fee opens at 10% and decays to 1% over the first hour. It is a tax on their stake, not a wall — see the honesty corner.</p></div>
+      <div class="card sticker"><div class="icon">🪙</div><h3>The jar only fills</h3><p>After graduation the pool runs in compounding mode: the pool’s share of every swap fee is added straight back to liquidity instead of to a fee wallet. Depth goes one direction.</p></div>
+      <div class="card sticker"><div class="icon">🔒</div><h3>Nobody can empty it</h3><p>100% of the LP is permanently locked — not vested, not timelocked. There is no withdraw instruction anyone can call. That includes us, and we cannot change our minds later.</p></div>
+      <div class="card sticker"><div class="icon">⚠️</div><h3>It guards the liquidity, not the price</h3><p>A locked jar cannot be emptied, but anyone holding tokens can still sell into it. Deeper means a dump moves price less. It does not mean a dump can’t happen.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What Jarold actually is</h2>
+    <div class="mech">
+      <div class="card">
+        <h3>A pool with a ratchet</h3>
+        <p>Strip the cartoon off and there is one mechanism here. A normal AMM collects a fee on every swap and parks it in a balance somebody can later claim. Jarold’s pool is set to <b>compounding mode</b>, so the pool’s share of that fee is added back to the liquidity itself — and the LP position holding it is <b>permanently locked</b>, so there is no instruction anyone can call to take it back out.</p>
+        <p>Together those two settings make pool depth a one-way function:</p>
+        <dl class="oneway">
+          <dt>in</dt><dd>every swap, forever</dd>
+          <dt>out</dt><dd>nothing, for anyone, ever</dd>
+        </dl>
+        <p class="caveat">Compounding mode is Meteora’s feature, not ours. What is unusual is pairing it with a full permanent lock — normally fees are compounded <i>so that</i> someone can eventually withdraw a bigger position. Removing that exit is the whole idea.</p>
+      </div>
+      <div class="card">
+        <h3>It is a slow ratchet</h3>
+        <p>At a 1% fee, roughly 0.008&nbsp;SOL of depth is added per 1&nbsp;SOL of volume. So the jar fills in proportion to how much it is actually traded:</p>
+        <table class="ratchet">
+          <tr><th>cumulative volume</th><th>pool depth</th></tr>
+          <tr class="now"><td>at launch</td><td>110 SOL</td></tr>
+          <tr><td>13,700 SOL</td><td>219 SOL &nbsp;(2×)</td></tr>
+          <tr><td>50,000 SOL</td><td>510 SOL &nbsp;(4.6×)</td></tr>
+          <tr><td>250,000 SOL</td><td>2,110 SOL &nbsp;(19×)</td></tr>
+        </table>
+        <p class="caveat">Doubling the pool takes about 125× its own size in volume. On day one the jar is thin and a large early holder can still move the price hard. The protection is something the jar earns over time, not something it has at launch. These figures assume the pool keeps 80% of the fee after Meteora’s cut — we have not measured the real cut yet.</p>
+      </div>
     </div>
   </section>
 
@@ -188,9 +230,10 @@ footer p{margin:0 0 10px}
       <div class="card nope yes"><h3>What the model shows</h3><ul>
         <li><span><b>Fees that stay make the pool deeper.</b> Same trades, bigger pool. Run it yourself above.</span></li>
         <li><span><b>A deeper pool flinches less.</b> The same whale dump moves price less.</span></li>
-        <li><span><b>Jarold fills several times faster</b> than a normal graduated pump.fun coin.</span></li>
+        <li><span><b>Jarold fills faster</b> than a pool that pays its fees out — under this model’s assumptions, which we picked. It is a sketch of the mechanism, not a forecast.</span></li>
       </ul></div>
       <div class="card nope"><h3>Jarold will not promise</h3><ul>
+        <li><span><b>That you can’t get dumped on.</b> The lock stops the jar being emptied. It does nothing about who holds the tokens. Someone who buys early and sells later is selling <i>into</i> the jar, not taking it — and on day one, when the jar is still thin, that moves the price a long way down. Nothing in Meteora’s program caps how much one wallet can buy.</span></li>
         <li><span><b>Number go up.</b> Nobody knows that. Anyone who says they do is lying.</span></li>
         <li><span><b>A stable price.</b> A fuller jar softens dumps. It doesn't stop them.</span></li>
         <li><span><b>That people will trade.</b> Higher fees scare some bots off. The sim doesn't model that.</span></li>
@@ -207,9 +250,9 @@ footer p{margin:0 0 10px}
     <ol class="card recipe">
       <li><div><b>Bonding curve launch</b>Meteora's Dynamic Bonding Curve sells the first tokens from a 1B supply. No custom contract to audit.</div></li>
       <li><div><b>Authorities burned at mint</b>Minted with <code>tokenAuthorityOption: Immutable</code>, so there is no mint authority. We verify mint, freeze and metadata authority are all null on devnet before launching.</div></li>
-      <li><div><b>Fee opens at 10%, decays to 1%</b>Exponential, 60 steps over the first hour. Line-cutters fill the jar.</div></li>
+      <li><div><b>Fee opens at 10%, decays to 1%</b>Exponential, 60 steps over the first hour, so the earliest buys pay the most into the jar. It is a tax on early entries, not a cap on them — Meteora’s amount-based limiter is deprecated and unavailable to new launches.</div></li>
       <li><div><b>Graduate into a compounding pool</b>A DAMM v2 pool at 1% base fee (plus up to 0.19% volatility fee) in compounding mode, so the pool’s share of the fee is added back to liquidity.</div></li>
-      <li><div><b>Lock 100% of liquidity, permanently</b>Not vested, not time-locked — permanent. Nobody has a withdraw path, including us.</div></li>
+      <li><div><b>Lock 100% of liquidity, permanently</b>Not vested, not timelocked — permanent, with no withdraw path for us or anyone else. Meteora’s own programs are upgradeable, so the code reading our config can change even though the config cannot.</div></li>
       <li><div><b>Test on devnet first</b>Every parameter above is validated by the SDK's own validator and simulated on devnet before anything goes live.</div></li>
     </ol>
   </section>
@@ -225,7 +268,7 @@ footer p{margin:0 0 10px}
 <script>
 (function(){
   const $=id=>document.getElementById(id);
-  $("mq").textContent="$NOBACKSIES ✦ NO BACKSIES ✦ PLAYGROUND RULES APPLY ✦ YOU PUT IT IN, IT STAYS IN ✦ LP LOCKED FOREVER ✦ NO TOKEN YET, CALM DOWN ✦ ".repeat(6);
+  $("mq").textContent="$NOBACKSIES ✦ NO BACKSIES ✦ THE JAR ONLY GETS DEEPER ✦ YOU PUT IT IN, IT STAYS IN ✦ LP LOCKED FOREVER ✦ PROTECTS THE LIQUIDITY, NOT THE PRICE ✦ NO TOKEN YET, CALM DOWN ✦ ".repeat(6);
 
   const fmt={fee:v=>v+"%",vol:v=>v+"×",dec:v=>v+"%",whale:v=>v+"%"};
   Object.keys(fmt).forEach(k=>{const el=$(k),o=$(k+"O");const u=()=>o.textContent=fmt[k](el.value);el.addEventListener("input",u);u();});
