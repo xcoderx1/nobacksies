@@ -170,11 +170,11 @@ footer p{margin:0 0 10px}
     <div class="mech">
       <div class="card">
         <h3>A pool with a ratchet</h3>
-        <p>Strip the cartoon off and there is one mechanism here. A normal AMM collects a fee on every swap and parks it in a balance somebody can later claim. Jarold’s pool is set to <b>compounding mode</b>, so the pool’s share of that fee is added back to the liquidity itself — and the LP position holding it is <b>permanently locked</b>, so there is no instruction anyone can call to take it back out.</p>
+        <p>Strip the cartoon off and there is one mechanism here. A normal AMM collects a fee on every swap and parks it in a balance somebody can later claim. Jarold’s pool is set to <b>compounding mode</b>, so the pool’s share of that fee is added back to the liquidity itself — and the LP position holding it is <b>permanently locked</b>, so in the current program there is no instruction anyone can call to take the liquidity back out. Our fee share is a separate thing, claimed from the position rather than withdrawn from it, and Meteora takes its protocol cut before either of us sees anything.</p>
         <p>Together those two settings make pool depth a one-way function:</p>
         <dl class="oneway">
           <dt>in</dt><dd>every swap, forever</dd>
-          <dt>out</dt><dd>nothing, for anyone, ever</dd>
+          <dt>out</dt><dd>no liquidity, for anyone, ever</dd>
         </dl>
         <p class="caveat">Compounding mode is Meteora’s feature, not ours. What is unusual is pairing it with a full permanent lock — normally fees are compounded <i>so that</i> someone can eventually withdraw a bigger position. Removing that exit is the whole idea.</p>
       </div>
@@ -229,7 +229,7 @@ footer p{margin:0 0 10px}
         <li><span><b>That people will trade.</b> Higher fees scare some bots off. The sim doesn't model that.</span></li>
         <li><span><b>That the early fee stops snipers.</b> It taxes their stake, not their size. A 15&nbsp;SOL buy in the first block still clears a large profit on the way up. Nothing available in the program caps a single buyer.</span></li>
         <li><span><b>That compounding can never be switched off.</b> Our config is permanent, but <code>compounding_fee_bps</code> becomes ordinary pool state at migration, and Meteora's already-deployed <code>update_pool_fees</code> instruction can turn it down — no program upgrade required. Both programs are also upgradeable by their own authority. We hold neither key, and we cannot stop either.</span></li>
-        <li><span><b>That the whole fee compounds.</b> Meteora's protocol cut comes out first. We compound 100% of what is left, and will publish the measured cut after devnet.</span></li>
+        <li><span><b>That the whole fee compounds.</b> Meteora's protocol cut comes out first. We compound <b>half</b> of what is left (<code>compoundingFeeBps 5000</code>) and claim the other half. The measured protocol cut will be published after devnet.</span></li>
         <li><span><b>That fees compound before graduation.</b> Compounding only exists in the DAMM v2 pool. On the bonding curve itself, fees go to a fee claimer — the chain has no way to route them into the curve. We will publish that address before launch.</span></li>
       </ul></div>
     </div>
@@ -242,8 +242,8 @@ footer p{margin:0 0 10px}
       <li><div><b>Authorities burned at mint</b>Minted with <code>tokenAuthorityOption: Immutable</code>, so there is no mint authority. We verify mint, freeze and metadata authority are all null on devnet before launching.</div></li>
       <li><div><b>Fee opens at 10%, decays to 1%</b>Exponential, 60 steps over the first hour. These fees do <b>not</b> go into the jar — compounding only exists after graduation, so curve-phase fees go to our fee claimer. The earliest buyers pay <b>us</b> the most, not the pool. It is a tax on early entries, not a cap on them; Meteora’s amount-based limiter is deprecated and unavailable to new launches.</div></li>
       <li><div><b>Graduate into a compounding pool</b>A DAMM v2 pool at 1% base fee (plus up to 0.19% volatility fee) in compounding mode, so the pool’s share of the fee is added back to liquidity.</div></li>
-      <li><div><b>Lock 100% of liquidity, permanently</b>Not vested, not timelocked — permanent, with no withdraw path for us or anyone else. Meteora’s own programs are upgradeable and its operators can still retune a live pool, so the code reading our config can change even though the config cannot.</div></li>
-      <li><div><b>Test on devnet first</b>Every parameter above is validated by the SDK's own validator and simulated on devnet before anything goes live.</div></li>
+      <li><div><b>Lock 100% of liquidity, permanently</b>Not vested, not timelocked — permanent. Nobody can withdraw the liquidity, us included. We do claim a fee share from that position, which is a separate thing and is in the table above. Meteora’s own programs are upgradeable and its operators can still retune a live pool, so the code reading our config can change even though the config cannot.</div></li>
+      <li><div><b>Test on devnet first</b>Every parameter above passes the SDK's own validator today. None of it has been run on devnet yet — it will be graduated and claimed from on devnet before anything goes live. See the gate below.</div></li>
     </ol>
 
   <section>
@@ -259,9 +259,10 @@ footer p{margin:0 0 10px}
         <li>Claim a fee from the locked position through the real custody wallet</li>
         <li>Confirm removing liquidity <b>fails</b> — the only direct proof the lock is enforced rather than assumed</li>
         <li>Record the pool’s real protocol fee percent; the 80% used above is an assumption</li>
+        <li>Confirm whether the dynamic / volatility fee is split and compounded like the base fee, or handled differently</li>
       </ul>
       <p class="caveat" style="margin-top:16px">In a sample of 41 migrated pools of this type on mainnet, <b>zero</b>
-      used a permanent liquidity lock — every one used withdrawable liquidity. The combination here is barely
+      used a permanent liquidity lock. We checked the permanent-lock setting only, not vesting or time locks, so the right claim is that none were permanently locked — not that all were freely withdrawable. The combination here is barely
       travelled, which is its own risk and the reason the gate exists.</p>
     </div>
   </section>
