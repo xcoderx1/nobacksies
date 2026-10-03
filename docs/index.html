@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>$NOBACKSIES</title>
 <meta name="description" content="Jarold is a jar. The liquidity goes in and stays in, forever, not even we can take it out. You can sell any time. Not launched yet.">
-<link rel="icon" href="assets/logo.png">
-<link rel="apple-touch-icon" href="assets/logo.png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="$NOBACKSIES — no backsies.">
 <meta property="og:description" content="Jarold is a jar. The liquidity goes in and stays in, forever, not even we can take it out. You can sell any time. Not launched yet.">
@@ -49,6 +50,7 @@ img{max-width:100%;height:auto}
   border-radius:999px;box-shadow:5px 5px 0 var(--ink);transform:rotate(-4deg);margin-bottom:20px}
 .hero h1{font-family:var(--display);font-weight:400;font-size:clamp(62px,11vw,136px);line-height:.84;margin:0;color:var(--paper);
   -webkit-text-stroke:5px var(--ink);paint-order:stroke fill;text-shadow:9px 9px 0 var(--ink);transform:rotate(-3deg)}
+.hero .mascot{transform:scale(1.24);transform-origin:center}
 .hero img{display:block;animation:bob 3.6s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-12px) rotate(1deg)}}
 
@@ -83,6 +85,21 @@ section{padding:40px 0}
 .getall:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--ink)}
 .packnote{margin:14px 0 0;font-weight:600;color:var(--muted);font-size:15px}
 
+.social{display:inline-flex;gap:10px;flex-wrap:wrap;margin-right:12px}
+.social a{font-family:var(--display);font-size:17px;background:var(--paper);border:4px solid var(--ink);
+  border-radius:999px;padding:5px 16px;box-shadow:3px 3px 0 var(--ink);text-decoration:none;color:var(--ink)}
+.social a:hover{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.ca{margin:18px 0 0;padding:16px 20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center}
+@media (max-width:560px){.ca{flex-direction:column;gap:10px;padding:14px}.ca code{font-size:12.5px}}
+.ca .lbl{font-family:var(--display);font-size:19px}
+.ca code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;
+  /* fixed colours, not theme vars: in dark mode --sky and --ink are both navy
+     and the address became invisible */
+  background:#EAF6FF;color:#13243B;border:3px solid #13243B;border-radius:10px;padding:7px 11px;
+  max-width:100%;min-width:0;overflow-wrap:anywhere;word-break:break-all;line-height:1.45}
+.ca button{font-family:var(--display);font-size:17px;background:var(--sun);border:4px solid var(--ink);
+  border-radius:999px;padding:6px 18px;box-shadow:3px 3px 0 var(--ink);cursor:pointer;color:var(--ink)}
+.ca button:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
 footer{padding:24px 0 56px}
 footer .card{padding:22px;font-size:15px}
 footer p{margin:0 0 10px}
@@ -90,7 +107,7 @@ footer a{color:var(--ink)}
 
 @media (max-width:900px){
   .hero{grid-template-columns:1fr;padding-top:10px}
-  .hero .mascot{max-width:330px;margin:0 auto}
+  .hero .mascot{max-width:330px;margin:0 auto;transform:none}
   .comic,.cast,.packgrid{grid-template-columns:1fr 1fr}
 }
 @media (max-width:560px){
@@ -104,7 +121,8 @@ footer a{color:var(--ink)}
 <div class="marquee" aria-hidden="true"><div id="mq"></div></div>
 
 <div class="wrap">
-  <div class="topbar"><a class="nerdlink" href="nerd.html">how it actually works &rarr;</a></div>
+  <div class="topbar"><span id="hdr-social" class="social"></span><a class="nerdlink" href="nerd.html">how it actually works &rarr;</a></div>
+  <div id="ca-slot"></div>
 
   <header class="hero">
     <div>
@@ -152,7 +170,7 @@ footer a{color:var(--ink)}
       <div class="card who">
         <img src="assets/cast/cast-tilda.png" width="420" height="420" alt="Toll Tilda">
         <h3>Toll Tilda</h3>
-        <p>Runs the tollbooth by the gate. The toll opens steep &mdash; 10% in the first seconds, falling to 1% within the hour &mdash; and that early toll is hers, less the gate&rsquo;s own cut. Once the gate opens she keeps half of what the jar earns and the other half stays in. She&rsquo;ll tell you the exact numbers before you ask; they&rsquo;re on the board in <a href="nerd.html">the nerd corner</a>.</p>
+        <p>Runs the tollbooth. Takes a cut and tells you exactly how much. The numbers are on the board in <a href="nerd.html">the nerd corner</a>.</p>
       </div>
     </div>
   </section>
@@ -166,7 +184,8 @@ footer a{color:var(--ink)}
 
   <footer>
     <div class="card">
-      <p><b>Not launched yet.</b> There is no token. Nothing here is financial advice. Meme coins are speculative and most go to zero.</p>
+      <p id="status-line"><b>Not launched yet.</b> There is no token. Nothing here is financial advice. Meme coins are speculative and most go to zero.</p>
+      <p id="ftr-social" class="social"></p>
       <p>The dev earns a disclosed share of trading fees &mdash; the exact numbers are in <a href="nerd.html">the nerd corner</a>, along with everything we can&rsquo;t promise. Jarold is a cartoon.</p>
     </div>
   </footer>
@@ -192,6 +211,57 @@ footer a{color:var(--ink)}
     return '<div class="card sticker"><img src="' + f + '" width="512" height="512" loading="lazy" alt="' + s[1] + '">' +
            '<a href="' + f + '" download>' + s[1] + '</a></div>';
   }).join("");
+
+  /* ---- launch switch -------------------------------------------------
+     launch.json is fetched at runtime. Anything unexpected -- fetch fails,
+     bad JSON, launched false, invalid mint, non-https link -- leaves the page
+     exactly as it is pre-launch. It fails to the safe state, never to a
+     half-rendered one. */
+  var B58 = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
+  function validMint(m){ return typeof m === "string" && B58.test(m.trim()); }
+  function validUrl(u){
+    if (typeof u !== "string" || !u.trim()) return null;
+    try { var p = new URL(u.trim()); return p.protocol === "https:" ? p.href : null; } catch (e) { return null; }
+  }
+
+  function renderLaunched(cfg){
+    var links = [["X", cfg.x], ["Telegram", cfg.telegram], ["DEX Screener", cfg.dexscreener]]
+      .map(function(p){ var u = validUrl(p[1]); return u ? '<a href="' + u + '" target="_blank" rel="noopener noreferrer">' + p[0] + '</a>' : ""; })
+      .join("");
+    var hdr = document.getElementById("hdr-social");
+    var ftr = document.getElementById("ftr-social");
+    if (hdr) hdr.innerHTML = links;
+    if (ftr) ftr.innerHTML = links;
+
+    if (validMint(cfg.mint)) {
+      var mint = cfg.mint.trim();
+      var slot = document.getElementById("ca-slot");
+      slot.innerHTML = '<div class="card ca"><span class="lbl">contract</span>' +
+        '<code id="ca-text">' + mint + '</code>' +
+        '<button id="ca-copy" type="button">copy</button></div>';
+      var btn = document.getElementById("ca-copy");
+      btn.addEventListener("click", function(){
+        var done = function(){ btn.textContent = "copied!"; setTimeout(function(){ btn.textContent = "copy"; }, 1600); };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(mint).then(done, done);
+        } else {
+          var r = document.createRange(); r.selectNode(document.getElementById("ca-text"));
+          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+          try { document.execCommand("copy"); } catch (e) {}
+          sel.removeAllRanges(); done();
+        }
+      });
+    }
+
+    var status = document.getElementById("status-line");
+    if (status) status.innerHTML = "<b>The token is live.</b> Nothing here is financial advice. " +
+      "Meme coins are speculative and most go to zero.";
+  }
+
+  fetch("launch.json", { cache: "no-store" })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(cfg){ if (cfg && cfg.launched === true) renderLaunched(cfg); })
+    .catch(function(){ /* stay pre-launch */ });
 })();
 </script>
 </body>

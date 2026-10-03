@@ -1,14 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-<defs><clipPath id="jarclip"><rect x="96" y="120" width="232" height="256" rx="40"/></clipPath></defs>
-
-  <g transform="translate(142,96) scale(1.05)">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"><defs><clipPath id="jarclip"><rect x="96" y="120" width="232" height="256" rx="40"/></clipPath></defs><g transform="translate(142,96) scale(1.05)">
     <ellipse cx="112" cy="306" rx="86" ry="14" fill="#13243B" opacity=".16"/>
     <path d="M48 222 Q4 200 10 160" fill="none" stroke="#13243B" stroke-width="22" stroke-linecap="round"/>
        <path d="M176 222 Q220 200 214 160" fill="none" stroke="#13243B" stroke-width="22" stroke-linecap="round"/>
        <path d="M48 222 Q4 200 10 160" fill="none" stroke="#FFC9A3" stroke-width="12" stroke-linecap="round"/>
        <path d="M176 222 Q220 200 214 160" fill="none" stroke="#FFC9A3" stroke-width="12" stroke-linecap="round"/>
-       <circle cx="10" cy="152" r="18" fill="#FFC9A3" stroke="#13243B" stroke-width="7"/>
-       <circle cx="214" cy="152" r="18" fill="#FFC9A3" stroke="#13243B" stroke-width="7"/>
+       <g transform="translate(10,150) rotate(-20) scale(0.85)">
+  <ellipse cx="0" cy="0" rx="21" ry="18" fill="#FFC9A3" stroke="#13243B" stroke-width="6"/>
+  <ellipse cx="-3" cy="-15" rx="9" ry="11" fill="#FFC9A3" stroke="#13243B" stroke-width="5"/></g><g transform="translate(214,150) rotate(20) scale(0.85)">
+  <ellipse cx="0" cy="0" rx="21" ry="18" fill="#FFC9A3" stroke="#13243B" stroke-width="6"/>
+  <ellipse cx="-3" cy="-15" rx="9" ry="11" fill="#FFC9A3" stroke="#13243B" stroke-width="5"/></g>
     <rect x="46" y="166" width="132" height="124" rx="26" fill="#FF9AA2" stroke="#13243B" stroke-width="9"/>
     <circle cx="112" cy="76" r="68" fill="#FFC9A3" stroke="#13243B" stroke-width="9"/>
     <path d="M52 44 Q112 -2 172 44" fill="#8B5A3C" stroke="#13243B" stroke-width="9" stroke-linejoin="round"/>
@@ -17,7 +17,4 @@
        <path d="M140 84 Q144 118 150 136" stroke="#7CC6FF" stroke-width="11" stroke-linecap="round" fill="none"/>
        <path d="M92 112 Q112 94 132 112" fill="none" stroke="#13243B" stroke-width="8" stroke-linecap="round"/>
        <path d="M64 44 L100 54" stroke="#13243B" stroke-width="9" stroke-linecap="round"/>
-       <path d="M160 44 L124 54" stroke="#13243B" stroke-width="9" stroke-linecap="round"/></g>
-  
-  <text x="256" y="488" text-anchor="middle" font-family="Lilita One" font-size="42"
-        fill="#fff" stroke="#13243B" stroke-width="9" paint-order="stroke" letter-spacing="1">can i have it back</text></svg>
+       <path d="M160 44 L124 54" stroke="#13243B" stroke-width="9" stroke-linecap="round"/></g><text x="256" y="488" text-anchor="middle" font-family="Lilita One" font-size="42" fill="#fff" stroke="#13243B" stroke-width="9" paint-order="stroke" letter-spacing="1">can i have it back</text></svg>

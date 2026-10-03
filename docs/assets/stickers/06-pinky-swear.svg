@@ -1,32 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-<defs><clipPath id="jarclip"><rect x="96" y="120" width="232" height="256" rx="40"/></clipPath></defs>
-
-  <g transform="translate(0,20)">
-    <!-- LEFT hand, tilted in -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"><defs><clipPath id="jarclip"><rect x="96" y="120" width="232" height="256" rx="40"/></clipPath></defs><g transform="translate(0,20)">
     <g transform="translate(52,0) rotate(-14 130 220)">
       <path d="M46 176 q0 -34 40 -34 h58 q34 0 34 38 v62 q0 38 -34 38 h-58 q-40 0 -40 -34 z" fill="#FFC9A3" stroke="#13243B" stroke-width="9" stroke-linejoin="round"/>
       <path d="M86 142 q18 -16 34 0 q18 -16 34 0" fill="none" stroke="#13243B" stroke-width="8" stroke-linecap="round"/>
       <path d="M96 196 h74 M96 228 h74" stroke="#13243B" stroke-width="7" opacity=".4" stroke-linecap="round"/>
-      <!-- pinky: short, thick, tapering, hooks down and ends free -->
       <path d="M178 182 q46 -6 54 24 q8 30 -16 42" fill="none" stroke="#13243B" stroke-width="42" stroke-linecap="round"/>
-      <path d="M178 182 q46 -6 54 24 q8 30 -16 42" fill="none" stroke="#FFC9A3" stroke-width="27" stroke-linecap="round"/>
-    </g>
-    <!-- RIGHT hand, tilted in -->
+      <path d="M178 182 q46 -6 54 24 q8 30 -16 42" fill="none" stroke="#FFC9A3" stroke-width="27" stroke-linecap="round"/></g>
     <g transform="translate(-52,0) rotate(14 382 220)">
       <path d="M466 176 q0 -34 -40 -34 h-58 q-34 0 -34 38 v62 q0 38 34 38 h58 q40 0 40 -34 z" fill="#EFAE85" stroke="#13243B" stroke-width="9" stroke-linejoin="round"/>
       <path d="M426 142 q-18 -16 -34 0 q-18 -16 -34 0" fill="none" stroke="#13243B" stroke-width="8" stroke-linecap="round"/>
       <path d="M342 196 h74 M342 228 h74" stroke="#13243B" stroke-width="7" opacity=".4" stroke-linecap="round"/>
       <path d="M334 258 q-46 6 -54 -24 q-8 -30 16 -42" fill="none" stroke="#13243B" stroke-width="42" stroke-linecap="round"/>
-      <path d="M334 258 q-46 6 -54 -24 q-8 -30 16 -42" fill="none" stroke="#EFAE85" stroke-width="27" stroke-linecap="round"/>
-    </g>
-    <!-- left pinky hook redrawn on top so the link is unmistakable -->
+      <path d="M334 258 q-46 6 -54 -24 q-8 -30 16 -42" fill="none" stroke="#EFAE85" stroke-width="27" stroke-linecap="round"/></g>
     <g transform="translate(52,0) rotate(-14 130 220)">
       <path d="M216 190 q22 8 16 32 q-6 26 -28 26" fill="none" stroke="#13243B" stroke-width="42" stroke-linecap="round"/>
-      <path d="M216 190 q22 8 16 32 q-6 26 -28 26" fill="none" stroke="#FFC9A3" stroke-width="27" stroke-linecap="round"/>
-    </g>
-  </g>
-  
-  <text x="256" y="432" text-anchor="middle" font-family="Lilita One" font-size="46"
-        fill="#fff" stroke="#13243B" stroke-width="9" paint-order="stroke" letter-spacing="1">pinky swear.</text>
-  <text x="256" y="486" text-anchor="middle" font-family="Lilita One" font-size="46"
-        fill="#fff" stroke="#13243B" stroke-width="9" paint-order="stroke" letter-spacing="1">no backsies.</text></svg>
+      <path d="M216 190 q22 8 16 32 q-6 26 -28 26" fill="none" stroke="#FFC9A3" stroke-width="27" stroke-linecap="round"/></g>
+  </g><text x="256" y="432" text-anchor="middle" font-family="Lilita One" font-size="46" fill="#fff" stroke="#13243B" stroke-width="9" paint-order="stroke" letter-spacing="1">pinky swear.</text><text x="256" y="486" text-anchor="middle" font-family="Lilita One" font-size="46" fill="#fff" stroke="#13243B" stroke-width="9" paint-order="stroke" letter-spacing="1">no backsies.</text></svg>

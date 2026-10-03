@@ -1,12 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" width="420" height="420">
-<defs><clipPath id="jarclip"><rect x="96" y="120" width="232" height="256" rx="40"/></clipPath></defs>
-  <ellipse cx="210" cy="372" rx="110" ry="16" fill="#13243B" opacity=".16"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" width="420" height="420"><defs><clipPath id="jarclip"><rect x="96" y="120" width="232" height="256" rx="40"/></clipPath></defs><ellipse cx="210" cy="372" rx="110" ry="16" fill="#13243B" opacity=".16"/>
   <rect x="96" y="150" width="228" height="196" rx="26" fill="#9AA6B5" stroke="#13243B" stroke-width="9"/>
   <rect x="134" y="192" width="152" height="76" rx="12" fill="#13243B"/>
   <circle cx="176" cy="230" r="17" fill="#FF5A5F"/><circle cx="244" cy="230" r="17" fill="#FF5A5F"/>
   <path d="M140 150 V104 M280 150 V104" stroke="#13243B" stroke-width="10" stroke-linecap="round"/>
-  <circle cx="140" cy="92" r="16" fill="#FFD43B" stroke="#13243B" stroke-width="8"/>
-  <circle cx="280" cy="92" r="16" fill="#FFD43B" stroke="#13243B" stroke-width="8"/>
+  <circle cx="140" cy="92" r="16" fill="#FFD43B" stroke="#13243B" stroke-width="8"/><circle cx="280" cy="92" r="16" fill="#FFD43B" stroke="#13243B" stroke-width="8"/>
   <path d="M138 302 h144" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
   <path d="M70 250 q-26 26 0 52" fill="none" stroke="#13243B" stroke-width="12" stroke-linecap="round"/>
   <path d="M350 250 q26 26 0 52" fill="none" stroke="#13243B" stroke-width="12" stroke-linecap="round"/></svg>
