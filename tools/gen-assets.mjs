@@ -99,6 +99,18 @@ w('cast/cast-tilda.svg', P(`<ellipse cx="210" cy="376" rx="120" ry="16" fill="${
   <path d="M40 318 h72" stroke="${RED}" stroke-width="14" stroke-linecap="round"/>
   <path d="M308 318 h72" stroke="${RED}" stroke-width="14" stroke-linecap="round"/>`))
 
+/* ---------------- hero + token-logo candidate ----------------
+   hero-jarold.svg is TRANSPARENT: it sits over the page background, so an
+   opaque plate would cover whatever is behind it (this is what was overlapping
+   the header button and the contract box).
+   logo-mitten.svg is the OPAQUE token-icon candidate -- a token icon wants a
+   solid background. It is written to a separate name so docs/assets/logo.png,
+   the originally supplied art, is never overwritten. */
+w('hero-jarold.svg', svg(1000,1000,`<g transform="translate(78,52) scale(2.0)">${jarold({eyes:'angry',arms:'cross'})}</g>`))
+w('logo-mitten.svg', svg(1000,1000,`<rect width="1000" height="1000" fill="${SKY}"/>
+  <g opacity=".55">${Array.from({length:144},(_,i)=>`<circle cx="${(i%12)*86+32}" cy="${Math.floor(i/12)*86+32}" r="5" fill="#fff"/>`).join('')}</g>
+  <g transform="translate(78,52) scale(2.0)">${jarold({eyes:'angry',arms:'cross'})}</g>`))
+
 /* ---------------- logo + banner ----------------
    NOT generated. docs/assets/logo.png and banner.png are the original supplied
    brand art and are the source of truth. An earlier version of this file

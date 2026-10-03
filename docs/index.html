@@ -39,8 +39,9 @@ img{max-width:100%;height:auto}
 .marquee div{display:inline-block;padding:10px 0;animation:scroll 32s linear infinite}
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-.topbar{display:flex;justify-content:flex-end;padding:16px 0 0}
-.nerdlink{display:inline-block;font-family:var(--display);font-size:19px;background:var(--paper);border:4px solid var(--ink);
+.topbar{display:flex;justify-content:flex-end;align-items:flex-start;gap:10px;flex-wrap:wrap;padding:16px 0 0;position:relative;z-index:2}
+#ca-slot{position:relative;z-index:2}
+.nerdlink{display:inline-block;white-space:nowrap;font-family:var(--display);font-size:19px;background:var(--paper);border:4px solid var(--ink);
   border-radius:999px;padding:7px 20px;box-shadow:4px 4px 0 var(--ink);text-decoration:none;color:var(--ink)}
 .nerdlink:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
 
@@ -50,7 +51,6 @@ img{max-width:100%;height:auto}
   border-radius:999px;box-shadow:5px 5px 0 var(--ink);transform:rotate(-4deg);margin-bottom:20px}
 .hero h1{font-family:var(--display);font-weight:400;font-size:clamp(62px,11vw,136px);line-height:.84;margin:0;color:var(--paper);
   -webkit-text-stroke:5px var(--ink);paint-order:stroke fill;text-shadow:9px 9px 0 var(--ink);transform:rotate(-3deg)}
-.hero .mascot{transform:scale(1.24);transform-origin:center}
 .hero img{display:block;animation:bob 3.6s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-12px) rotate(1deg)}}
 
@@ -86,7 +86,7 @@ section{padding:40px 0}
 .packnote{margin:14px 0 0;font-weight:600;color:var(--muted);font-size:15px}
 
 .social{display:inline-flex;gap:10px;flex-wrap:wrap;margin-right:12px}
-.social a{font-family:var(--display);font-size:17px;background:var(--paper);border:4px solid var(--ink);
+.social a{font-family:var(--display);font-size:17px;white-space:nowrap;background:var(--paper);border:4px solid var(--ink);
   border-radius:999px;padding:5px 16px;box-shadow:3px 3px 0 var(--ink);text-decoration:none;color:var(--ink)}
 .social a:hover{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
 .ca{margin:18px 0 0;padding:16px 20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center}
@@ -129,7 +129,7 @@ footer a{color:var(--ink)}
       <div class="ticker">$NOBACKSIES</div>
       <h1>NO<br>BACKSIES.</h1>
     </div>
-    <div class="mascot"><img src="assets/logo.png" width="1000" height="1000" alt="Jarold, a grumpy cartoon jar with a padlocked lid, full of coins"></div>
+    <div class="mascot"><img src="assets/hero-jarold.png" width="1000" height="1000" alt="Jarold, a grumpy cartoon jar with a padlocked lid, full of coins"></div>
   </header>
 
   <section>
@@ -241,15 +241,21 @@ footer a{color:var(--ink)}
         '<button id="ca-copy" type="button">copy</button></div>';
       var btn = document.getElementById("ca-copy");
       btn.addEventListener("click", function(){
-        var done = function(){ btn.textContent = "copied!"; setTimeout(function(){ btn.textContent = "copy"; }, 1600); };
+        var ok = function(){ btn.textContent = "copied!"; setTimeout(function(){ btn.textContent = "copy"; }, 1600); };
+        // Select the address and tell the reader to copy it themselves. Claiming
+        // "copied!" when the write failed is worse than saying nothing.
+        var fail = function(){
+          try {
+            var r = document.createRange(); r.selectNode(document.getElementById("ca-text"));
+            var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+          } catch (e) {}
+          var mac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+          btn.textContent = mac ? "press \u2318C" : "press Ctrl+C";
+          setTimeout(function(){ btn.textContent = "copy"; }, 3200);
+        };
         if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(mint).then(done, done);
-        } else {
-          var r = document.createRange(); r.selectNode(document.getElementById("ca-text"));
-          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
-          try { document.execCommand("copy"); } catch (e) {}
-          sel.removeAllRanges(); done();
-        }
+          navigator.clipboard.writeText(mint).then(ok, fail);
+        } else { fail(); }
       });
     }
 

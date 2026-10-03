@@ -21,3 +21,4 @@ cd "$A/stickers"; for f in *.svg; do render "$f" 512 512; done
 cd "$A/comic";    for f in *.svg; do render "$f" 420 500; done
 cd "$A/cast";     for f in *.svg; do render "$f" 420 420; done
 # logo.png and banner.png are original art, not generated -- never rendered here.
+cd "$A";          render hero-jarold.svg 1000 1000; render logo-mitten.svg 1000 1000

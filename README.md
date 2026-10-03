@@ -232,6 +232,21 @@ withdrawable partner LP. Permanent lock plus Compounding is a combination almost
 nothing has run through. Graduating your exact config on devnet is the only way
 to find out what that path does before it is irreversible.
 
+## On launch day
+
+`docs/launch.json` flips the page to the launched state at runtime, but **link
+previews do not run JavaScript**. X, Telegram and Facebook read the raw HTML, so
+they will keep showing "Not launched yet" until the tags themselves change.
+
+- [ ] set `launched: true` in `docs/launch.json`, with the mint and the links
+- [ ] **edit the three meta descriptions in `docs/index.html` by hand** --
+      `name="description"`, `og:description`, `twitter:description` -- replacing
+      "Not launched yet" with the live wording. launch.json cannot do this.
+- [ ] same for `og:title` / `twitter:title` if the wording changes
+- [ ] re-scrape the preview caches: a draft post on X, Sharing Debugger on
+      Facebook, `@WebpageBot` on Telegram. They will not re-fetch on their own.
+- [ ] decide the token image before uploading metadata -- it is immutable after
+
 ## Still non-technical
 
 - the metadata JSON and image, uploaded; `TOKEN.uri` is immutable after launch
