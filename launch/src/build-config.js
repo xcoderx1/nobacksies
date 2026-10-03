@@ -25,7 +25,7 @@ import {
   TOKEN,
   LEFTOVER_RECEIVER,
   VALIDATION_PLACEHOLDER_RECEIVER,
-} from '../config/nobacksies.config.js'
+} from '../config/active.js'
 
 const { token } = CURVE
 

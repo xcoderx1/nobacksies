@@ -27,7 +27,7 @@ import {
 import { DynamicBondingCurveClient } from '@meteora-ag/dynamic-bonding-curve-sdk'
 import 'dotenv/config'
 import { buildConfig } from './build-config.js'
-import { TOKEN, QUOTE_MINT, LEFTOVER_RECEIVER } from '../config/nobacksies.config.js'
+import { TOKEN, QUOTE_MINT, LEFTOVER_RECEIVER, FEE_CLAIMER_DEFAULT, CONFIG_NAME } from '../config/active.js'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const KEYS_DIR = join(HERE, '..', '.keys')
@@ -96,13 +96,22 @@ function preflight(cluster) {
   // So this key permanently controls ALL post-graduation income. It cannot be
   // changed afterwards and nothing can recover it. Use a hardware wallet or a
   // multisig, never a hot key on a laptop.
-  if (!env('FEE_CLAIMER')) {
+  // On devnet this falls back to the Squads vault from scripts/squads-devnet.ts,
+  // because testing the PDA-signing path IS the gate. On mainnet there is no
+  // fallback: it must be set deliberately.
+  if (!env('FEE_CLAIMER') && !FEE_CLAIMER_DEFAULT) {
     stop.push(
       'FEE_CLAIMER is not set. It is written into the immutable config and is the ' +
         'only address that can ever claim bonding-curve trading fees. Set it ' +
         'deliberately — to an address nobody can sign for if you mean the fees to ' +
         'be unclaimable.',
     )
+  }
+  if (CONFIG_NAME === 'devnet' && cluster.name !== 'devnet') {
+    stop.push(`config is the devnet one (threshold ~1 SOL) but the cluster is ${cluster.name}. Refusing.`)
+  }
+  if (CONFIG_NAME === 'mainnet' && cluster.name === 'devnet' && SEND) {
+    stop.push('cluster is devnet but the MAINNET config is loaded. Set NOBACKSIES_CONFIG=devnet to rehearse.')
   }
   if (SEND && cluster.name !== 'devnet') {
     // Fail closed: unknown counts as mainnet.
@@ -149,15 +158,17 @@ async function main() {
 
   const config = stableKeypair('config')
   const baseMint = stableKeypair('base-mint')
-  const feeClaimer = new PublicKey(env('FEE_CLAIMER'))
+  const feeClaimerStr = env('FEE_CLAIMER') ?? FEE_CLAIMER_DEFAULT
+  const feeClaimer = new PublicKey(feeClaimerStr)
 
-  console.log(`\n  cluster      ${cluster.name}  (${RPC_URL})`)
+  console.log(`\n  config       ${CONFIG_NAME}`)
+  console.log(`  cluster      ${cluster.name}  (${RPC_URL})`)
   console.log(`  genesis      ${cluster.hash}`)
   console.log(`  payer        ${payer.publicKey.toBase58()}`)
   console.log(`  config       ${config.kp.publicKey.toBase58()}  ${config.reused ? '(reused from .keys)' : '(new, saved to .keys)'}`)
   console.log(`  base mint    ${baseMint.kp.publicKey.toBase58()}  ${baseMint.reused ? '(reused from .keys)' : '(new, saved to .keys)'}`)
   console.log(`  quote mint   ${QUOTE_MINT}`)
-  console.log(`  fee claimer  ${feeClaimer.toBase58()}`)
+  console.log(`  fee claimer  ${feeClaimer.toBase58()}${env('FEE_CLAIMER') ? '' : '  (Squads vault)'}`)
   if (feeClaimer.equals(payer.publicKey)) {
     console.log('')
     console.log('  \u26a0  FEE_CLAIMER is the same key as the payer.')

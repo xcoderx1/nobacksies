@@ -163,6 +163,34 @@ signs directly. A Squads vault is the opposite: a PDA that signs by having the
 Squads program invoke cp-amm on its behalf. That path is not exercised by
 anything we verified, and `FEE_CLAIMER` can never be changed afterwards.
 
+```bash
+# 0. a funded devnet wallet
+solana-keygen new -o ~/.config/solana/nobacksies-devnet.json
+solana airdrop 2 -u devnet -k ~/.config/solana/nobacksies-devnet.json
+export KEYPAIR_PATH=~/.config/solana/nobacksies-devnet.json
+
+# 1. the 2-of-3 Squads multisig; prints the vault that becomes FEE_CLAIMER
+node scripts/squads-devnet.ts              # dry run
+node scripts/squads-devnet.ts --create
+
+# 2. validate the devnet config (same as mainnet, 1.0965 SOL threshold)
+cd launch && NOBACKSIES_CONFIG=devnet npm run build:config
+
+# 3. launch, then graduate
+NOBACKSIES_CONFIG=devnet node src/launch.js --send
+NOBACKSIES_CONFIG=devnet node src/migrate.js <pool> --send
+```
+
+The devnet config inherits every parameter from the mainnet one by reference --
+permanent lock, Compounding, compoundingFeeBps, fee schedule, authorities -- and
+overrides only the two market caps, keeping the 20x ratio so the curve shape is
+identical. `config/active.js` switches between them, and launch.js refuses to run
+a devnet config against mainnet or a mainnet config against devnet.
+
+Squads v4 program `SQDS4ep65T869zMMBKyuUq6aD6EgTu8psMjkvj52pCf`, verified on
+chain as executable on both clusters. Its ProgramConfig treasury DIFFERS per
+cluster, so the script reads it from chain rather than hardcoding it.
+
 ```
 1. Create a Squads multisig on devnet. Set its vault as FEE_CLAIMER.
 2. Launch with the exact mainnet config:
