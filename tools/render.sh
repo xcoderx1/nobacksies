@@ -20,4 +20,4 @@ EOF
 cd "$A/stickers"; for f in *.svg; do render "$f" 512 512; done
 cd "$A/comic";    for f in *.svg; do render "$f" 420 500; done
 cd "$A/cast";     for f in *.svg; do render "$f" 420 420; done
-cd "$A";          render logo.svg 1000 1000; render banner.svg 1500 500
+# logo.png and banner.png are original art, not generated -- never rendered here.

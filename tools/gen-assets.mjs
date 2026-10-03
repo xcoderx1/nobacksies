@@ -99,15 +99,9 @@ w('cast/cast-tilda.svg', P(`<ellipse cx="210" cy="376" rx="120" ry="16" fill="${
   <path d="M40 318 h72" stroke="${RED}" stroke-width="14" stroke-linecap="round"/>
   <path d="M308 318 h72" stroke="${RED}" stroke-width="14" stroke-linecap="round"/>`))
 
-/* ---------------- logo 1000, banner 1500x500 ---------------- */
-w('logo.svg', svg(1000,1000,`<g transform="translate(78,52) scale(2.0)">${jarold({eyes:'angry',arms:'cross'})}</g>`))
-w('banner.svg', svg(1500,500,`
-  <rect width="1500" height="500" fill="${SKY}"/>
-  <g opacity=".5">${Array.from({length:120},(_,i)=>`<circle cx="${(i%20)*78+20}" cy="${Math.floor(i/20)*78+22}" r="4" fill="#fff"/>`).join('')}</g>
-  <text x="92" y="214" font-family="Lilita One" font-size="128" fill="${PAPER}" stroke="${INK}" stroke-width="13" paint-order="stroke">NO</text>
-  <text x="92" y="330" font-family="Lilita One" font-size="128" fill="${PAPER}" stroke="${INK}" stroke-width="13" paint-order="stroke">BACKSIES.</text>
-  <g transform="rotate(-4 300 408)"><rect x="92" y="372" width="330" height="70" rx="35" fill="${RED}" stroke="${INK}" stroke-width="7"/>
-   <text x="257" y="422" text-anchor="middle" font-family="Lilita One" font-size="38" fill="${PAPER}" stroke="${INK}" stroke-width="4" paint-order="stroke">$NOBACKSIES</text></g>
-  <g transform="rotate(2 900 400)"><rect x="700" y="372" width="420" height="68" rx="16" fill="${SUN}" stroke="${INK}" stroke-width="7"/>
-   <text x="910" y="420" text-anchor="middle" font-family="Lilita One" font-size="31" fill="${INK}">you put it in, it stays in</text></g>
-  <g transform="translate(1120,28) scale(1.05)">${jarold({eyes:'angry',arms:'cross'})}</g>`))
+/* ---------------- logo + banner ----------------
+   NOT generated. docs/assets/logo.png and banner.png are the original supplied
+   brand art and are the source of truth. An earlier version of this file
+   regenerated them from jarold(), which overwrote them; restored from fc581d2
+   and deliberately left out. Do not add them back here -- re-running this
+   script must never touch them. */
